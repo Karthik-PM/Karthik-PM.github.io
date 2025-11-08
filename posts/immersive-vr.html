@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Immersive 360° VR Experience — Notes</title>
+  <style>
+    body{font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;max-width:900px;margin:0 auto;padding:2rem;background:#f8f9fa;color:#222}
+    .container{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+    h1{color:#1a73e8}
+    p.meta{color:#666}
+    h3{margin-top:1rem}
+    pre{background:#f4f6fb;padding:1rem;border-radius:6px;overflow:auto}
+    a.back{display:inline-block;margin-top:1rem;color:#1a73e8;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Immersive 360° VR Experience</h1>
+    <p class="meta">Project notes — Jan 2024 to May 2024</p>
+
+    <p>This post summarizes the key technical components of my bachelor's thesis and related work on panoramic video stitching and immersive VR. It highlights the feature-based matching, homography estimation, cylindrical projection to reduce frame skew, camera calibration, and CUDA-accelerated warping.</p>
+
+    <h3>Key contributions</h3>
+    <ul>
+      <li>Feature-based matching using KNN on SIFT descriptors for robust frame alignment.</li>
+      <li>Homography estimation for accurate image registration and warping.</li>
+      <li>Cylindrical projection to reduce frame skew and improve stitching quality.</li>
+      <li>Camera calibration routine to estimate intrinsic parameters for cylindrical mapping.</li>
+      <li>GPU acceleration using CUDA for warping — achieved 1.3x–2x speedup.</li>
+    </ul>
+
+    <h3>Implementation notes</h3>
+    <p>Implemented using OpenGL and OpenCV for low-level image processing and rendering. CUDA kernels were written to parallelize the warping step and reduce per-frame processing time.</p>
+
+    <a class="back" href="/blog.html">← Back to blog</a>
+  </div>
+</body>
+</html>

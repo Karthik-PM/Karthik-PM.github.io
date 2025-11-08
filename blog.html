@@ -12,6 +12,14 @@
         .meta{color:#666;margin-bottom:1rem}
         .post-list{margin-top:1rem}
         .post{padding:1rem;border-radius:8px;border:1px solid #eef3ff;margin-bottom:0.75rem;background:#fcfeff}
+        .post-category {
+            margin-bottom: 2.5rem;
+        }
+        .post-category h2 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
         .back{display:inline-block;margin-top:1rem;color:#1a73e8;text-decoration:none}
         .post a{color:#1a73e8;text-decoration:none;font-weight:600}
     </style>
@@ -22,10 +30,22 @@
     <p class="meta">Thoughts, project notes and short technical write-ups.</p>
 
     <div class="post-list">
-      <article class="post">
-        <h2><a href="posts/immersive-vr.html">Immersive 360° VR Experience — project notes</a></h2>
-        <p class="meta">Jan 2024 — Project summary and technical notes on panoramic video stitching, CUDA acceleration and cylindrical projection.</p>
-      </article>
+      <section class="post-category">
+        <h2>Deep Learning Series</h2>
+        <article class="post">
+          <h3><a href="posts/linear-regression.html">Understanding Linear Regression: From Theory to Implementation</a></h3>
+          <p class="meta">Nov 2025 — A comprehensive guide to linear regression, including mathematical foundations, gradient descent, and Python implementation.</p>
+        </article>
+        <!-- More deep learning posts will be added here -->
+      </section>
+
+      <section class="post-category">
+        <h2>Project Notes</h2>
+        <article class="post">
+          <h3><a href="posts/immersive-vr.html">Immersive 360° VR Experience — project notes</a></h3>
+          <p class="meta">Jan 2024 — Project summary and technical notes on panoramic video stitching, CUDA acceleration and cylindrical projection.</p>
+        </article>
+      </section>
     </div>
 
     <a class="back" href="index.html">← Back to home</a>

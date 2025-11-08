@@ -14,6 +14,15 @@
             background-color: #f8f9fa;
             color: #212529;
         }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         .container {
             background-color: white;
             padding: 2rem;
@@ -44,27 +53,92 @@
             background-color: #1a73e8;
             color: white;
         }
+        ul {
+            padding-left: 20px;
+            margin-top: 0.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .bio-info ul {
+            list-style-type: circle;
+        }
+        .thesis-button {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .thesis-button:hover {
+            background-color: #1557b0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQE-cGeKtk8_vA/profile-displayphoto-crop_800_800/B56ZmvwY7_G4AI-/0/1759590322588?e=1764201600&v=beta&t=1fMghv8SsecoaIJlvonQkztD8eQdusa48tSCSdB5o_4" alt="Karthik's Profile Picture" class="profile-img">
         <h1>Karthik</h1>
         
         <div class="bio-info">
             <h2>About Me</h2>
-            <p>Student at Universität Siegen, Germany</p>
-            <p>I am passionate about technology and currently pursuing my studies at the prestigious Universität Siegen. My academic journey is focused on expanding my knowledge and skills in the field of technology and engineering.</p>
+            <p>I am a graduate student specializing in Visual Computing at Universität Siegen, Germany. My research interests focus on computer vision, virtual reality, and GPU computing. With a strong foundation in computer science and engineering, I am passionate about developing innovative solutions in immersive technologies.</p>
         </div>
 
         <div class="bio-info">
             <h2>Education</h2>
-            <p>🎓 Student at Universität Siegen</p>
+            <p>🎓 M.S. in Computer Science, Specialization in Visual Computing<br>
+               <span style="font-size: 0.95em; color: #666;">Universität Siegen, Germany | 2025 - Present</span></p>
+            
+            <p>🎓 B.Tech in Computer Science and Engineering<br>
+               <span style="font-size: 0.95em; color: #666;">Amrita Vishwa Vidyapeetham, Amritapuri Campus, India | 2020 - 2024</span></p>
+        </div>
+
+        <div class="bio-info">
+            <h2>Research Publication</h2>
+            <p><strong>IEEE Xplore – Efficient Computing for Immersive VR: Real-Time Panoramic Video Stitching on GPU Platforms</strong></p>
+            <ul>
+                <li>Presented at the 5th International Conference for Emerging Technology, 2024</li>
+                <li>Implemented feature-based video stitching with GPU-accelerated warping using OpenGL and CUDA</li>
+                <li>Developed advanced FPS analysis technique using SMA and WMA</li>
+            </ul>
+            <a href="https://ieeexplore.ieee.org/abstract/document/10593115" target="_blank" class="thesis-button">
+                📃 View Published Paper
+            </a>
+        </div>
+
+        <div class="bio-info">
+            <h2>Funded Research Projects</h2>
+            <p><strong>Augmented Reality Temple Reconstruction Project</strong></p>
+            <ul>
+                <li>Funded by the Department of Science and Technology, Government of India</li>
+                <li>Developed using low-level libraries with OpenGL and OpenCV</li>
+                <li>Center for Wireless Networks and Application, Feb 2023 - May 2024</li>
+            </ul>
+
+            <p><strong>Bachelor's Thesis: Immersive 360° VR Experience</strong></p>
+            <ul>
+                <li>Supported by the Amrita Seed Grant</li>
+                <li>Implemented feature-based matching using KNN matching on SIFT descriptors</li>
+                <li>Achieved 1.3x to 2x acceleration using NVIDIA CUDA GPU implementation</li>
+                <li>Developed camera calibration algorithm for cylindrical projection</li>
+            </ul>
+            <a href="https://drive.google.com/file/d/1FqJF77vapmbK4RYGK14xFDMXiNL1FvW3/view?usp=sharing" target="_blank" class="thesis-button">
+                📄 View Bachelor's Thesis
+            </a>
+            <a href="https://drive.google.com/file/d/1q5Ah2Wk15P1e2ZgY8pmTHo1Xhe_yBxbx/view?usp=sharing" target="_blank" class="thesis-button" style="margin-left: 1rem;">
+                📜 View Recommendation Letter
+            </a>
         </div>
 
         <div class="social-links">
             <a href="https://github.com/Karthik-PM" target="_blank">GitHub</a>
-            <!-- Add your email with the actual email address -->
-            <a href="mailto:your.email@uni-siegen.de">Email</a>
+            <a href="mailto:karthikpm52@gmail.com">Email</a>
         </div>
     </div>
 </body>

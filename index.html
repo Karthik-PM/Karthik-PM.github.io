@@ -3,182 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karthik Palliyan Manakadavath - Visual Computing at Universität Siegen</title>
+    <title>Karthik PM — Visual Computing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #f8f9fa;
-            color: #212529;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary:       #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark:  #3730a3;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50:  #f8fafc;
         }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--slate-50);
+            color: var(--slate-800);
+            line-height: 1.7;
+        }
+
+        /* ─── HERO ─────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(140deg, #0f172a 0%, #1e1b4b 55%, #0f172a 100%);
+            padding: 4.5rem 2rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 60%, rgba(99,102,241,.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 25%, rgba(6,182,212,.12)   0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+
         .profile-img {
-            width: 200px;
-            height: 200px;
+            width: 150px; height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 2rem auto;
-            display: block;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid rgba(129,140,248,.5);
+            box-shadow: 0 0 0 6px rgba(79,70,229,.15), 0 20px 50px rgba(0,0,0,.45);
+            margin-bottom: 1.5rem;
         }
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .hero h1 {
+            color: #fff;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            margin-bottom: .4rem;
         }
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 1rem;
-        }
-        .nav {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-            flex-wrap: wrap;
-        }
-        .nav a {
-            color: #1a73e8;
+        .hero .subtitle { color: #a5b4fc; font-size: .95rem; margin-bottom: .2rem; }
+        .hero .location { color: var(--slate-400); font-size: .85rem; margin-bottom: 2rem; }
+
+        .hero-social { display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap; }
+        .hero-social a {
+            color: #e2e8f0;
             text-decoration: none;
-            padding: 0.35rem 0.6rem;
-            border-radius: 6px;
-            border: 1px solid transparent;
+            padding: .45rem .95rem;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 8px;
+            font-size: .82rem; font-weight: 500;
+            background: rgba(255,255,255,.05);
+            backdrop-filter: blur(6px);
+            display: inline-flex; align-items: center; gap: .4rem;
+            transition: all .2s;
         }
-        .nav a:hover {
-            background: #e8f0fe;
-            border-color: #cfe0fd;
-        }
-        .bio-info {
-            margin-bottom: 2rem;
-        }
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        .social-links a {
-            color: #1a73e8;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid #1a73e8;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .social-links a:hover {
-            background-color: #1a73e8;
-            color: white;
-        }
-        .social-links a i {
-            font-size: 1.1em;
-        }
-        ul {
-            padding-left: 20px;
-            margin-top: 0.5rem;
-        }
-        li {
-            margin-bottom: 0.5rem;
-        }
-        .bio-info ul {
-            list-style-type: circle;
-        }
-        .thesis-button {
-            display: inline-block;
-            background-color: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-        .thesis-button:hover {
-            background-color: #1557b0;
+        .hero-social a:hover {
+            background: rgba(99,102,241,.28);
+            border-color: rgba(129,140,248,.55);
+            color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* ─── STICKY NAV ───────────────────────────────────── */
+        .sticky-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--slate-100);
+            padding: .6rem 1.5rem;
+            display: flex; gap: .3rem; justify-content: center; flex-wrap: wrap;
+            box-shadow: 0 1px 6px rgba(0,0,0,.04);
+        }
+        .sticky-nav a {
+            color: var(--slate-500);
+            text-decoration: none;
+            padding: .35rem .8rem;
+            border-radius: 6px;
+            font-size: .82rem; font-weight: 500;
+            transition: all .18s;
+        }
+        .sticky-nav a:hover { color: var(--primary); background: #ede9fe; }
+
+        /* ─── MAIN ─────────────────────────────────────────── */
+        .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+        /* ─── SECTION ──────────────────────────────────────── */
+        .section { margin-bottom: 2.5rem; }
+
+        .section-title {
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--slate-800);
+            margin-bottom: 1.1rem;
+            padding-bottom: .5rem;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex; align-items: center; gap: .55rem;
+        }
+        .section-title .icon {
+            width: 26px; height: 26px;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            border-radius: 6px;
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #fff; font-size: .72rem; flex-shrink: 0;
+        }
+
+        /* ─── CARD ─────────────────────────────────────────── */
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.4rem 1.5rem;
+            border: 1px solid var(--slate-100);
+            box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
+            margin-bottom: 1rem;
+            transition: box-shadow .2s, transform .2s;
+        }
+        .card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-1px); }
+
+        /* ─── ABOUT ────────────────────────────────────────── */
+        .about-text { font-size: .92rem; color: var(--slate-700); }
+
+        /* ─── EDUCATION ────────────────────────────────────── */
+        .edu-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .edu-icon {
+            width: 38px; height: 38px; flex-shrink: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: .95rem; margin-top: .1rem;
+        }
+        .edu-info h3 { font-size: .9rem; font-weight: 600; color: var(--slate-800); margin-bottom: .15rem; }
+        .edu-info .inst { font-size: .8rem; color: var(--slate-500); }
+
+        /* ─── BUTTONS ──────────────────────────────────────── */
+        .btn {
+            display: inline-flex; align-items: center; gap: .4rem;
+            padding: .48rem 1.05rem;
+            border-radius: 8px;
+            font-size: .82rem; font-weight: 500;
+            text-decoration: none;
+            transition: all .2s;
+            margin-top: .9rem; margin-right: .5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(79,70,229,.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 4px 16px rgba(79,70,229,.4);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            border: 1px solid var(--slate-300);
+            color: var(--slate-700);
+            background: #fff;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: #f5f3ff; }
+
+        /* ─── TAGS ─────────────────────────────────────────── */
+        .tag {
+            display: inline-block;
+            padding: .18rem .55rem;
+            border-radius: 99px;
+            font-size: .72rem; font-weight: 500;
+            background: #ede9fe; color: #5b21b6;
+            margin: .15rem .1rem;
+        }
+        .tag-cyan  { background: #ecfeff; color: #0891b2; }
+        .tag-green { background: #f0fdf4; color: #166534; }
+        .tag-amber { background: #fffbeb; color: #92400e; }
+
+        /* ─── RESEARCH BULLET LIST ──────────────────────────── */
+        .bullet-list { padding-left: 1.1rem; margin-top: .5rem; }
+        .bullet-list li { font-size: .875rem; color: var(--slate-700); margin-bottom: .3rem; }
+
+        /* ─── PRODUCT CARD ─────────────────────────────────── */
+        .product-grid { display: grid; gap: 1rem; }
+
+        .product-inner { display: flex; gap: 1.2rem; align-items: flex-start; }
+
+        .product-icon {
+            width: 54px; height: 54px; flex-shrink: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,.2);
+        }
+
+        .product-body { flex: 1; min-width: 0; }
+        .product-body h3 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; color: var(--slate-800); }
+        .product-body .product-sub { font-size: .78rem; color: var(--slate-500); margin-bottom: .65rem; }
+
+        .product-features { display: flex; flex-wrap: wrap; gap: .25rem; margin-bottom: .65rem; }
+
+        .platform-row { display: flex; gap: .45rem; flex-wrap: wrap; }
+        .platform-badge {
+            display: inline-flex; align-items: center; gap: .3rem;
+            padding: .22rem .6rem;
+            border-radius: 6px; font-size: .72rem; font-weight: 500;
+            border: 1px solid var(--slate-200);
+            color: var(--slate-600); background: var(--slate-50);
+        }
+
+        /* ─── DIVIDER ──────────────────────────────────────── */
+        .divider { border: none; border-top: 1px solid var(--slate-100); margin: 1rem 0; }
+
+        /* ─── FOOTER ───────────────────────────────────────── */
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            color: var(--slate-400);
+            font-size: .78rem;
+            border-top: 1px solid var(--slate-100);
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        /* ─── RESPONSIVE ───────────────────────────────────── */
+        @media (max-width: 580px) {
+            .hero { padding: 3.5rem 1.25rem 2.5rem; }
+            .main { padding: 2rem 1.1rem 3rem; }
+            .product-inner { flex-direction: column; }
+            .product-icon { width: 44px; height: 44px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://media.licdn.com/dms/image/v2/D5603AQE-cGeKtk8_vA/profile-displayphoto-crop_800_800/B56ZmvwY7_G4AI-/0/1759590322588?e=1764201600&v=beta&t=1fMghv8SsecoaIJlvonQkztD8eQdusa48tSCSdB5o_4" alt="Karthik's Profile Picture" class="profile-img">
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+    <div class="hero-content">
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQE-cGeKtk8_vA/profile-displayphoto-crop_800_800/B56ZmvwY7_G4AI-/0/1759590322588?e=1764201600&v=beta&t=1fMghv8SsecoaIJlvonQkztD8eQdusa48tSCSdB5o_4"
+             alt="Karthik's profile photo" class="profile-img">
         <h1>Karthik Palliyan Manakadavath</h1>
-                <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="blog.html">Blog</a>
-        </nav>
-        
-        <div class="bio-info">
-            <h2>About Me</h2>
-            <p>I am a graduate student specializing in Visual Computing at Universität Siegen, Germany. My research interests focus on computer vision, virtual reality, and GPU computing. With a strong foundation in computer science and engineering, I am passionate about developing innovative solutions in immersive technologies.</p>
-        </div>
-
-        <div class="bio-info">
-            <h2>Education</h2>
-            <p>🎓 M.S. in Computer Science, Specialization in Visual Computing<br>
-               <span style="font-size: 0.95em; color: #666;">Universität Siegen, Germany | 2025 - Present</span></p>
-            
-            <p>🎓 B.Tech in Computer Science and Engineering<br>
-               <span style="font-size: 0.95em; color: #666;">Amrita Vishwa Vidyapeetham, Amritapuri Campus, India | 2020 - 2024</span></p>
-        </div>
-
-        <div class="bio-info">
-            <h2>Research Publication</h2>
-            <p><strong>IEEE Xplore – Efficient Computing for Immersive VR: Real-Time Panoramic Video Stitching on GPU Platforms</strong></p>
-            <ul>
-                <li>Presented at the 5th International Conference for Emerging Technology, 2024</li>
-                <li>Implemented feature-based video stitching with GPU-accelerated warping using OpenGL and CUDA</li>
-                <li>Developed advanced FPS analysis technique using SMA and WMA</li>
-            </ul>
-            <a href="https://ieeexplore.ieee.org/abstract/document/10593115" target="_blank" class="thesis-button">
-                📃 View Published Paper
-            </a>
-        </div>
-
-        <div class="bio-info">
-            <h2>Funded Research Projects</h2>
-            <p><strong>Undergraduate Researcher</strong> under <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color: #1a73e8; text-decoration: none;">Dr. Uma Gopalakrishan</a>, Amrita Center for Wireless Networks and Applications.</p>
-            <p>I contributed to two funded research projects as an undergraduate researcher. Details are below.</p>
-
-            <h3 style="margin-bottom:0.25rem; margin-top:0.75rem;">Augmented Reality Temple Reconstruction Project</h3>
-            <ul>
-                <li>Role: Undergraduate Researcher — contributed to design and implementation of AR reconstruction pipelines</li>
-                <li>Funding: Department of Science and Technology, Government of India</li>
-                <li>Tech: OpenGL, OpenCV; low-level graphics and image-processing implementations</li>
-                <li>Affiliation / Dates: Amrita Center for Wireless Networks and Applications — Feb 2023 to May 2024</li>
-            </ul>
-            <a href="https://drive.google.com/file/d/1l0WCZ800pm4fYu03RWU20cVZOBkyJtmE/view" target="_blank" class="thesis-button">
-                🏆 View Project Certificate
-            </a>
-
-            <h3 style="margin-bottom:0.25rem; margin-top:0.75rem;">Bachelor's Thesis — Immersive 360° VR Experience</h3>
-            <p style="color: #666; margin-top: 0.25rem;">Thesis Guide: <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color: #1a73e8; text-decoration: none;">Dr. Uma Gopalakrishan</a></p>
-            <ul>
-                <li>Role: Lead student author; implemented core algorithms and GPU acceleration</li>
-                <li>Funding: Amrita Seed Grant (equipment and resources)</li>
-                <li>Contributions: Feature-based matching (KNN on SIFT descriptors), homography-based image registration, cylindrical projection to reduce frame skew, camera calibration for intrinsic parameter estimation, and CUDA-based acceleration (1.3x–2x speedup)</li>
-                <li>Dates: Jan 2024 to May 2024</li>
-            </ul>
-            <a href="https://drive.google.com/file/d/1FqJF77vapmbK4RYGK14xFDMXiNL1FvW3/view?usp=sharing" target="_blank" class="thesis-button">
-                📄 View Bachelor's Thesis
-            </a>
-            <a href="https://drive.google.com/file/d/1q5Ah2Wk15P1e2ZgY8pmTHo1Xhe_yBxbx/view?usp=sharing" target="_blank" class="thesis-button" style="margin-left: 1rem;">
-                📜 View Recommendation Letter
-            </a>
-        </div>
-
-        <div class="social-links">
+        <p class="subtitle">M.S. Visual Computing · Universität Siegen, Germany</p>
+        <p class="location"><i class="fas fa-map-marker-alt" style="font-size:.75rem;margin-right:.3rem;"></i>Siegen, Germany</p>
+        <div class="hero-social">
             <a href="https://github.com/Karthik-PM" target="_blank"><i class="fab fa-github"></i> GitHub</a>
             <a href="https://www.linkedin.com/in/karthikpm5/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://scholar.google.com/citations?user=xjUt4U8AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+            <a href="https://scholar.google.com/citations?user=xjUt4U8AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i> Scholar</a>
             <a href="mailto:karthikpm52@gmail.com"><i class="fas fa-envelope"></i> Email</a>
         </div>
     </div>
+</header>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="sticky-nav">
+    <a href="index.html">Home</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#products">Products</a>
+    <a href="blog.html">Blog</a>
+</nav>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<main class="main">
+
+    <!-- About -->
+    <section class="section" id="about">
+        <h2 class="section-title">
+            <span class="icon"><i class="fas fa-user"></i></span>
+            About Me
+        </h2>
+        <div class="card">
+            <p class="about-text">I am a graduate student specializing in Visual Computing at Universität Siegen, Germany. My research interests focus on computer vision, virtual reality, and GPU computing. With a strong foundation in computer science and engineering, I am passionate about developing innovative solutions in immersive technologies.</p>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section" id="education">
+        <h2 class="section-title">
+            <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+            Education
+        </h2>
+
+        <div class="card">
+            <div class="edu-item">
+                <div class="edu-icon"><i class="fas fa-university"></i></div>
+                <div class="edu-info">
+                    <h3>M.S. Computer Science — Specialization in Visual Computing</h3>
+                    <span class="inst">Universität Siegen, Germany &nbsp;·&nbsp; 2025 – Present</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="edu-item">
+                <div class="edu-icon"><i class="fas fa-university"></i></div>
+                <div class="edu-info">
+                    <h3>B.Tech Computer Science and Engineering</h3>
+                    <span class="inst">Amrita Vishwa Vidyapeetham, Amritapuri, India &nbsp;·&nbsp; 2020 – 2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Publication -->
+    <section class="section" id="research">
+        <h2 class="section-title">
+            <span class="icon"><i class="fas fa-file-alt"></i></span>
+            Research Publication
+        </h2>
+        <div class="card">
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:.3rem;">Efficient Computing for Immersive VR: Real-Time Panoramic Video Stitching on GPU Platforms</h3>
+            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.75rem;">
+                IEEE Xplore · 5th International Conference for Emerging Technology, 2024
+            </p>
+            <ul class="bullet-list">
+                <li>Implemented feature-based video stitching with GPU-accelerated warping using OpenGL and CUDA</li>
+                <li>Developed advanced FPS analysis technique using SMA and WMA</li>
+            </ul>
+            <div>
+                <span class="tag">OpenGL</span><span class="tag">CUDA</span>
+                <span class="tag">Computer Vision</span><span class="tag tag-cyan">GPU Computing</span>
+            </div>
+            <a href="https://ieeexplore.ieee.org/abstract/document/10593115" target="_blank" class="btn btn-primary">
+                <i class="fas fa-external-link-alt"></i> View Paper on IEEE Xplore
+            </a>
+        </div>
+    </section>
+
+    <!-- Funded Research Projects -->
+    <section class="section" id="projects">
+        <h2 class="section-title">
+            <span class="icon"><i class="fas fa-flask"></i></span>
+            Funded Research Projects
+        </h2>
+        <p style="font-size:.875rem;color:var(--slate-500);margin-bottom:1rem;">
+            Undergraduate Researcher under <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:500;">Dr. Uma Gopalakrishan</a>, Amrita Center for Wireless Networks and Applications.
+        </p>
+
+        <div class="card">
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:.25rem;">Augmented Reality Temple Reconstruction</h3>
+            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.65rem;">
+                Dept. of Science &amp; Technology, Govt. of India &nbsp;·&nbsp; Feb 2023 – May 2024
+            </p>
+            <ul class="bullet-list">
+                <li>Contributed to design and implementation of AR reconstruction pipelines</li>
+                <li>Low-level graphics and image-processing with OpenGL and OpenCV</li>
+            </ul>
+            <div style="margin-top:.6rem;">
+                <span class="tag">OpenGL</span><span class="tag">OpenCV</span>
+                <span class="tag tag-cyan">Augmented Reality</span>
+            </div>
+            <a href="https://drive.google.com/file/d/1l0WCZ800pm4fYu03RWU20cVZOBkyJtmE/view" target="_blank" class="btn btn-primary">
+                <i class="fas fa-trophy"></i> View Certificate
+            </a>
+        </div>
+
+        <div class="card">
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:.25rem;">Bachelor's Thesis — Immersive 360° VR Experience</h3>
+            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.65rem;">
+                Amrita Seed Grant &nbsp;·&nbsp; Jan 2024 – May 2024 &nbsp;·&nbsp;
+                Guide: <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--primary);text-decoration:none;">Dr. Uma Gopalakrishan</a>
+            </p>
+            <ul class="bullet-list">
+                <li>Feature-based matching (KNN on SIFT descriptors) and homography-based image registration</li>
+                <li>Cylindrical projection to reduce frame skew; camera calibration for intrinsic estimation</li>
+                <li>CUDA-based acceleration achieving 1.3×–2× speedup</li>
+            </ul>
+            <div style="margin-top:.6rem;">
+                <span class="tag">CUDA</span><span class="tag">SIFT</span>
+                <span class="tag tag-cyan">360° VR</span><span class="tag tag-green">Camera Calibration</span>
+            </div>
+            <a href="https://drive.google.com/file/d/1FqJF77vapmbK4RYGK14xFDMXiNL1FvW3/view?usp=sharing" target="_blank" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> View Thesis
+            </a>
+            <a href="https://drive.google.com/file/d/1q5Ah2Wk15P1e2ZgY8pmTHo1Xhe_yBxbx/view?usp=sharing" target="_blank" class="btn btn-outline">
+                <i class="fas fa-scroll"></i> Recommendation Letter
+            </a>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section" id="products">
+        <h2 class="section-title">
+            <span class="icon"><i class="fas fa-box"></i></span>
+            Products
+        </h2>
+        <div class="product-grid">
+            <div class="card">
+                <div class="product-inner">
+                    <div class="product-icon">⏱️</div>
+                    <div class="product-body">
+                        <h3>Study Timer</h3>
+                        <p class="product-sub">A Flutter app for focused study sessions with analytics and cross-device sync.</p>
+                        <div class="product-features">
+                            <span class="tag">Subject Tags</span>
+                            <span class="tag tag-cyan">Session Analytics</span>
+                            <span class="tag tag-green">Daily Streaks</span>
+                            <span class="tag tag-amber">WiFi Sync</span>
+                            <span class="tag">Export to Excel</span>
+                        </div>
+                        <div class="platform-row">
+                            <span class="platform-badge"><i class="fab fa-android"></i> Android</span>
+                            <span class="platform-badge"><i class="fab fa-linux"></i> Linux Desktop</span>
+                            <span class="platform-badge"><i class="fas fa-wifi"></i> Local WiFi Sync</span>
+                        </div>
+                        <a href="https://github.com/Karthik-PM/study_timer" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Built by <a href="https://github.com/Karthik-PM">Karthik Palliyan Manakadavath</a> · Universität Siegen</p>
+</footer>
+
 </body>
 </html>

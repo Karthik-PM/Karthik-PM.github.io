@@ -12,246 +12,134 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:            #0d1117;
-            --panel:         #161b22;
-            --border:        #30363d;
-            --text:          #e6edf3;
-            --muted:         #7d8590;
-            --primary:       #4f46e5;
-            --primary-light: #818cf8;
-            --nav-h:         50px;
+            --bg:     #070b12;
+            --panel:  #0e1420;
+            --border: #1e2a3a;
+            --text:   #e2eaf4;
+            --muted:  #5a7090;
+            --pri:    #4f46e5;
+            --pril:   #818cf8;
+            --nav-h:  50px;
         }
 
         html, body { height: 100%; overflow: hidden; }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; }
 
-        /* ── NAV ── */
+        /* NAV */
         .top-nav {
-            height: var(--nav-h);
-            background: rgba(22,27,34,.96);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 1.2rem;
-            flex-shrink: 0;
-            z-index: 20;
+            height: var(--nav-h); background: rgba(10,14,22,.96); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); display: flex; align-items: center;
+            justify-content: space-between; padding: 0 1.2rem; flex-shrink: 0; z-index: 20;
         }
         .back-btn {
             display: inline-flex; align-items: center; gap: .35rem;
-            color: var(--muted); text-decoration: none;
-            font-size: .8rem; font-weight: 500;
-            padding: .3rem .65rem; border-radius: 6px;
-            border: 1px solid transparent;
-            transition: all .18s;
+            color: var(--muted); text-decoration: none; font-size: .8rem; font-weight: 500;
+            padding: .3rem .65rem; border-radius: 6px; border: 1px solid transparent; transition: all .18s;
         }
         .back-btn:hover { color: var(--text); border-color: var(--border); background: rgba(255,255,255,.04); }
         .nav-title { font-size: .875rem; font-weight: 600; letter-spacing: -.01em; }
-        .nav-right { width: 100px; display: flex; justify-content: flex-end; gap: .4rem; }
+        .nav-right { display: flex; gap: .4rem; }
         .icon-btn {
-            background: rgba(255,255,255,.05);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--muted);
-            width: 30px; height: 30px;
-            display: inline-flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: .75rem;
-            transition: all .18s;
+            background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 6px;
+            color: var(--muted); width: 30px; height: 30px; display: inline-flex; align-items: center;
+            justify-content: center; cursor: pointer; font-size: .75rem; transition: all .18s;
         }
-        .icon-btn:hover { color: var(--text); border-color: var(--primary-light); }
+        .icon-btn:hover { color: var(--text); border-color: var(--pril); }
 
-        /* ── LAYOUT ── */
+        /* LAYOUT */
         .layout { flex: 1; display: flex; overflow: hidden; }
-
         .canvas-section { flex: 1; position: relative; overflow: hidden; }
         #gc { width: 100%; height: 100%; display: block; }
 
         .hint {
             position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-            background: rgba(13,17,23,.75); backdrop-filter: blur(6px);
-            color: var(--muted); font-size: .7rem;
-            padding: .28rem .75rem; border-radius: 99px;
-            border: 1px solid var(--border); pointer-events: none;
-            transition: opacity .6s;
+            background: rgba(7,11,18,.8); backdrop-filter: blur(6px); color: var(--muted); font-size: .7rem;
+            padding: .28rem .75rem; border-radius: 99px; border: 1px solid var(--border);
+            pointer-events: none; transition: opacity .6s;
         }
         .hint.fade { opacity: 0; }
 
-        /* ── PANEL ── */
+        /* PANEL */
         .panel {
-            width: 310px; min-width: 260px;
-            background: var(--panel);
-            border-left: 1px solid var(--border);
-            overflow-y: auto; flex-shrink: 0;
-            display: flex; flex-direction: column;
+            width: 330px; min-width: 280px; background: var(--panel); border-left: 1px solid var(--border);
+            overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column;
         }
         .panel::-webkit-scrollbar { width: 3px; }
         .panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-        /* Panel blocks */
-        .pblock { padding: .85rem 1.1rem; border-bottom: 1px solid var(--border); }
-        .pblock-label {
-            font-size: .65rem; font-weight: 600; color: var(--muted);
-            text-transform: uppercase; letter-spacing: .07em; margin-bottom: .7rem;
-        }
+        .pblock { padding: .8rem 1.05rem; border-bottom: 1px solid var(--border); }
+        .pblock-label { font-size: .64rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .65rem; }
 
-        /* Formula */
-        .formula-wrap {
-            background: rgba(79,70,229,.08);
-            border: 1px solid rgba(129,140,248,.2);
-            border-radius: 8px;
-            padding: .7rem .9rem;
+        /* Formula box */
+        .fbox {
+            background: rgba(79,70,229,.07); border: 1px solid rgba(129,140,248,.18);
+            border-radius: 8px; padding: .65rem .85rem;
         }
-        .formula-line {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .72rem; line-height: 1.65;
-            color: #a5b4fc;
-        }
+        .fline { font-family: 'JetBrains Mono', monospace; font-size: .7rem; line-height: 1.6; color: #a5b4fc; }
         .fv { color: #fbbf24; font-weight: 600; }
-        .formula-note {
-            font-size: .65rem; color: var(--muted); margin-top: .35rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .foff { color: #f472b6; font-weight: 600; }
 
-        /* Covariance matrix display */
-        .cov-section { margin-top: .6rem; }
-        .cov-title {
-            font-size: .62rem; color: var(--muted); margin-bottom: .35rem;
-            font-family: 'JetBrains Mono', monospace;
+        /* 3×3 matrix */
+        .mat-section { margin-top: .6rem; }
+        .mat-label { font-size: .6rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: .3rem; }
+        .mat-wrap { display: flex; align-items: center; gap: .2rem; }
+        .mat-brkt { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; color: rgba(129,140,248,.4); display: flex; flex-direction: column; justify-content: space-between; line-height: 1.35; }
+        .mat3 { display: grid; grid-template-columns: repeat(3, auto); gap: .08rem .4rem; }
+        .mc { font-family: 'JetBrains Mono', monospace; font-size: .67rem; text-align: right; min-width: 40px; padding: .1rem 0; }
+        .mc.d { color: #fbbf24; }
+        .mc.o { color: #f472b6; }
+        .det-row { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--muted); margin-top: .35rem; }
+
+        /* Color swatches */
+        .swatches { display: flex; flex-wrap: wrap; gap: .45rem; }
+        .swatch {
+            width: 22px; height: 22px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: all .15s; flex-shrink: 0;
         }
-        .cov-matrix-wrap {
-            display: flex; align-items: center; gap: .35rem;
-        }
-        .cov-eq-label { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: #a5b4fc; }
-        .cov-bracket {
-            font-size: 2rem; line-height: 1; color: rgba(129,140,248,.5);
-            font-weight: 100; user-select: none;
-        }
-        .cov-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: .18rem .7rem;
-        }
-        .cov-cell {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .72rem; color: #fbbf24; font-weight: 500;
-            text-align: right; min-width: 38px;
-        }
-        .cov-cell.off { color: #f472b6; }
-        .det-line {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .62rem; color: var(--muted); margin-top: .35rem;
-        }
-        .det-line .fv { font-size: .62rem; }
+        .swatch:hover { transform: scale(1.18); }
+        .swatch.active { border-color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.3); }
 
         /* Sliders */
-        .sl-row { margin-bottom: .75rem; }
-        .sl-top {
-            display: flex; justify-content: space-between; align-items: baseline;
-            margin-bottom: .28rem;
-        }
-        .sl-name { font-size: .78rem; font-weight: 500; }
-        .sl-sym { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--muted); margin-left: .2rem; }
-        .sl-val {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .76rem; font-weight: 500; color: var(--primary-light);
-            min-width: 48px; text-align: right;
-        }
+        .sl-row { margin-bottom: .7rem; }
+        .sl-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .26rem; }
+        .sl-name { font-size: .77rem; font-weight: 500; }
+        .sl-sym { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--muted); margin-left: .2rem; }
+        .sl-val { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; color: var(--pril); min-width: 46px; text-align: right; }
 
-        input[type=range] {
-            width: 100%; height: 4px;
-            -webkit-appearance: none; appearance: none;
-            border-radius: 2px; outline: none; cursor: pointer;
-            background: var(--border);
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-            height: 4px; border-radius: 2px;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 14px; height: 14px;
-            border-radius: 50%; background: var(--primary);
-            border: 2px solid var(--panel);
-            box-shadow: 0 0 0 1px var(--primary);
-            cursor: pointer; transition: transform .12s;
-            margin-top: -5px;
-        }
+        input[type=range] { width: 100%; height: 4px; -webkit-appearance: none; appearance: none; border-radius: 2px; outline: none; cursor: pointer; background: var(--border); }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--pri); border: 2px solid var(--panel); box-shadow: 0 0 0 1px var(--pri); cursor: pointer; transition: transform .12s; margin-top: -4.5px; }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-        input[type=range]::-moz-range-thumb {
-            width: 12px; height: 12px; border-radius: 50%;
-            background: var(--primary); border: 2px solid var(--panel);
-            cursor: pointer;
-        }
-        input[type=range]::-moz-range-progress { background: var(--primary); height: 4px; border-radius: 2px; }
+        input[type=range]::-moz-range-thumb { width: 11px; height: 11px; border-radius: 50%; background: var(--pri); border: 2px solid var(--panel); cursor: pointer; }
+        input[type=range]::-moz-range-progress { background: var(--pri); height: 4px; border-radius: 2px; }
 
         /* Presets */
-        .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
+        .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .42rem; }
         .preset-btn {
-            background: rgba(255,255,255,.03);
-            border: 1px solid var(--border);
-            border-radius: 7px; color: var(--text);
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: .76rem; font-weight: 500;
-            padding: .48rem .5rem; cursor: pointer;
-            transition: all .18s; text-align: center;
+            background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 7px;
+            color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: .74rem; font-weight: 500;
+            padding: .45rem .5rem; cursor: pointer; transition: all .18s; text-align: center;
         }
-        .preset-btn:hover { background: rgba(79,70,229,.14); border-color: var(--primary); color: var(--primary-light); }
-        .preset-btn.active { background: rgba(79,70,229,.2); border-color: var(--primary); color: var(--primary-light); }
-
-        /* Colormaps */
-        .cmap-row { display: flex; gap: .35rem; }
-        .cmap-btn {
-            flex: 1; display: flex; flex-direction: column; align-items: center; gap: .25rem;
-            background: transparent; border: 1px solid var(--border);
-            border-radius: 6px; padding: .3rem .4rem;
-            cursor: pointer; transition: all .18s;
-        }
-        .cmap-btn:hover { border-color: var(--primary-light); }
-        .cmap-btn.active { border-color: var(--primary); background: rgba(79,70,229,.1); }
-        .cmap-swatch { width: 100%; height: 9px; border-radius: 3px; }
-        .cmap-label { font-size: .62rem; color: var(--muted); }
-        .cmap-btn.active .cmap-label { color: var(--primary-light); }
+        .preset-btn:hover { background: rgba(79,70,229,.14); border-color: var(--pri); color: var(--pril); }
+        .preset-btn.active { background: rgba(79,70,229,.2); border-color: var(--pri); color: var(--pril); }
 
         /* Toggles */
-        .toggle-row {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: .55rem;
-        }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
         .toggle-row:last-child { margin-bottom: 0; }
-        .toggle-name { font-size: .78rem; }
+        .toggle-name { font-size: .77rem; }
         .tswitch { position: relative; width: 32px; height: 17px; flex-shrink: 0; }
         .tswitch input { opacity: 0; width: 0; height: 0; }
-        .tslider {
-            position: absolute; inset: 0;
-            background: var(--border); border-radius: 17px;
-            cursor: pointer; transition: background .2s;
-        }
-        .tslider::before {
-            content: ''; position: absolute;
-            left: 2px; top: 2px; width: 13px; height: 13px;
-            border-radius: 50%; background: #fff;
-            transition: transform .2s;
-        }
-        input:checked + .tslider { background: var(--primary); }
+        .tslider { position: absolute; inset: 0; background: var(--border); border-radius: 17px; cursor: pointer; transition: background .2s; }
+        .tslider::before { content: ''; position: absolute; left: 2px; top: 2px; width: 13px; height: 13px; border-radius: 50%; background: #fff; transition: transform .2s; }
+        input:checked + .tslider { background: var(--pri); }
         input:checked + .tslider::before { transform: translateX(15px); }
 
-        /* Panel footer */
-        .panel-footer {
-            margin-top: auto; padding: .65rem 1.1rem;
-            font-size: .67rem; color: var(--muted);
-            text-align: center; border-top: 1px solid var(--border);
-        }
-        .panel-footer a { color: var(--primary-light); text-decoration: none; }
+        .panel-footer { margin-top: auto; padding: .6rem 1.05rem; font-size: .66rem; color: var(--muted); text-align: center; border-top: 1px solid var(--border); }
+        .panel-footer a { color: var(--pril); text-decoration: none; }
 
-        /* Mobile */
         @media (max-width: 680px) {
             html, body { overflow: auto; }
             .layout { flex-direction: column; overflow: visible; }
-            .canvas-section { height: 58vw; min-height: 240px; flex: none; }
+            .canvas-section { height: 56vw; min-height: 240px; flex: none; }
             .panel { width: 100%; min-width: 0; border-left: none; border-top: 1px solid var(--border); }
         }
     </style>
@@ -259,57 +147,51 @@
 <body>
 
 <nav class="top-nav">
-    <a href="index.html" class="back-btn">
-        <i class="fas fa-chevron-left"></i> Karthik PM
-    </a>
-    <span class="nav-title">3D Gaussian Explorer</span>
+    <a href="index.html" class="back-btn"><i class="fas fa-chevron-left"></i> Karthik PM</a>
+    <span class="nav-title">3D Gaussian Splatting Explorer</span>
     <div class="nav-right">
-        <button class="icon-btn" id="btnResetCam" title="Reset camera"><i class="fas fa-crosshairs"></i></button>
-        <button class="icon-btn" id="btnScreenshot" title="Save image"><i class="fas fa-camera"></i></button>
+        <button class="icon-btn" id="btnReset" title="Reset camera"><i class="fas fa-crosshairs"></i></button>
+        <button class="icon-btn" id="btnShot" title="Save image"><i class="fas fa-camera"></i></button>
     </div>
 </nav>
 
 <div class="layout">
-
-    <!-- 3D CANVAS -->
     <div class="canvas-section" id="wrap">
         <canvas id="gc"></canvas>
-        <div class="hint" id="hint">
-            <i class="fas fa-mouse" style="font-size:.62rem;margin-right:.3rem;"></i>
-            Drag to rotate · Scroll to zoom · Right-drag to pan
-        </div>
+        <div class="hint" id="hint"><i class="fas fa-mouse" style="font-size:.6rem;margin-right:.3rem;"></i>Drag · Scroll · Orbit — splat reprojects live</div>
     </div>
 
-    <!-- CONTROLS PANEL -->
     <aside class="panel">
 
-        <!-- Formula display -->
+        <!-- Equation + live 3×3 matrix -->
         <div class="pblock">
-            <div class="pblock-label">Bivariate Gaussian</div>
-            <div class="formula-wrap">
-                <div class="formula-line">f(x,y) = <span class="fv" id="fA">1.00</span> · exp(−½ xᵀΣ⁻¹x)</div>
-                <div class="formula-line" id="fQ" style="color:#94a3b8;font-size:.65rem;margin-top:.2rem;line-height:1.5;">
-                    Q = 1/(1−ρ²)·[(Δx/σₓ)² − 2ρ(Δx/σₓ)(Δy/σᵧ) + (Δy/σᵧ)²]
-                </div>
-                <!-- Covariance matrix -->
-                <div class="cov-section">
-                    <div class="cov-title">Σ (covariance matrix):</div>
-                    <div class="cov-matrix-wrap">
-                        <span class="cov-bracket">⎡<br>⎣</span>
-                        <div class="cov-grid">
-                            <span class="cov-cell" id="mSxx">1.00</span>
-                            <span class="cov-cell off" id="mSxy">0.00</span>
-                            <span class="cov-cell off" id="mSyx">0.00</span>
-                            <span class="cov-cell" id="mSyy">1.00</span>
+            <div class="pblock-label">3D Gaussian (3DGS)</div>
+            <div class="fbox">
+                <div class="fline">f(x) = <span class="fv" id="fA">0.90</span> · exp(−½ xᵀΣ⁻¹x)</div>
+                <div class="fline" style="color:#64748b;font-size:.64rem;margin-top:.15rem;">Σ = R · diag(σₓ²,σᵧ²,σᵤ²) · Rᵀ</div>
+                <div class="mat-section">
+                    <div class="mat-label">Σ — covariance matrix (live):</div>
+                    <div class="mat-wrap">
+                        <div class="mat-brkt"><span>⎡</span><span>⎢</span><span>⎣</span></div>
+                        <div class="mat3">
+                            <span class="mc d" id="m00">·</span><span class="mc o" id="m01">·</span><span class="mc o" id="m02">·</span>
+                            <span class="mc o" id="m10">·</span><span class="mc d" id="m11">·</span><span class="mc o" id="m12">·</span>
+                            <span class="mc o" id="m20">·</span><span class="mc o" id="m21">·</span><span class="mc d" id="m22">·</span>
                         </div>
-                        <span class="cov-bracket">⎤<br>⎦</span>
+                        <div class="mat-brkt"><span>⎤</span><span>⎥</span><span>⎦</span></div>
                     </div>
-                    <div class="det-line">det(Σ) = <span class="fv" id="mDet">1.00</span> &nbsp;·&nbsp; ρ = <span class="fv" id="mRho">0.00</span></div>
+                    <div class="det-row">det(Σ) = <span class="fv" id="mDet">·</span> &nbsp;|&nbsp; Σ⁻¹ used for splat shader</div>
                 </div>
             </div>
         </div>
 
-        <!-- Parameters -->
+        <!-- Color -->
+        <div class="pblock">
+            <div class="pblock-label">Splat Color</div>
+            <div class="swatches" id="swatches"></div>
+        </div>
+
+        <!-- Sliders -->
         <div class="pblock">
             <div class="pblock-label">Shape Parameters</div>
             <div id="sliders"></div>
@@ -321,25 +203,19 @@
             <div class="preset-grid" id="presets"></div>
         </div>
 
-        <!-- Colormap -->
-        <div class="pblock">
-            <div class="pblock-label">Colormap</div>
-            <div class="cmap-row" id="cmaps"></div>
-        </div>
-
-        <!-- Display toggles -->
+        <!-- Display -->
         <div class="pblock">
             <div class="pblock-label">Display</div>
             <div class="toggle-row">
-                <span class="toggle-name">Wireframe overlay</span>
+                <span class="toggle-name">Wireframe ellipsoid</span>
                 <label class="tswitch"><input type="checkbox" id="tWire"><span class="tslider"></span></label>
             </div>
             <div class="toggle-row">
-                <span class="toggle-name">Floor projection</span>
-                <label class="tswitch"><input type="checkbox" id="tProj"><span class="tslider"></span></label>
+                <span class="toggle-name">Floor shadow</span>
+                <label class="tswitch"><input type="checkbox" id="tFloor"><span class="tslider"></span></label>
             </div>
             <div class="toggle-row">
-                <span class="toggle-name">Show grid</span>
+                <span class="toggle-name">Grid</span>
                 <label class="tswitch"><input type="checkbox" id="tGrid" checked><span class="tslider"></span></label>
             </div>
             <div class="toggle-row">
@@ -348,10 +224,7 @@
             </div>
         </div>
 
-        <div class="panel-footer">
-            Interactive 3D Gaussian · <a href="index.html">Karthik PM</a>
-        </div>
-
+        <div class="panel-footer">3DGS-style splat · <a href="index.html">Karthik PM</a></div>
     </aside>
 </div>
 
@@ -367,73 +240,65 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-/* ═══════════════════════════════════════════════════
-   CONFIG
-═══════════════════════════════════════════════════ */
-const SEGS   = 110;   // grid resolution
-const DOMAIN = 5;     // surface spans [−5, 5] × [−5, 5]
+const DEG = Math.PI / 180;
 
+/* ═══════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════ */
 const SLIDER_DEFS = [
-    { key:'A',      label:'Amplitude',    sym:'A',  min:0.1,   max:3.0,  step:0.05, dec:2 },
-    { key:'sigmaX', label:'Std dev X',    sym:'σₓ', min:0.1,   max:3.0,  step:0.05, dec:2 },
-    { key:'sigmaY', label:'Std dev Y',    sym:'σᵧ', min:0.1,   max:3.0,  step:0.05, dec:2 },
-    { key:'rho',    label:'Correlation',  sym:'ρ',  min:-0.99, max:0.99, step:0.01, dec:2 },
-    { key:'muX',    label:'Center X',     sym:'μₓ', min:-3.0,  max:3.0,  step:0.05, dec:2 },
-    { key:'muY',    label:'Center Y',     sym:'μᵧ', min:-3.0,  max:3.0,  step:0.05, dec:2 },
+    { key:'A',  label:'Opacity',    sym:'α',   min:0.05, max:1.0,  step:0.01, dec:2 },
+    { key:'sx', label:'Scale X',    sym:'σₓ',  min:0.05, max:4.0,  step:0.05, dec:2 },
+    { key:'sy', label:'Scale Y',    sym:'σᵧ',  min:0.05, max:4.0,  step:0.05, dec:2 },
+    { key:'sz', label:'Scale Z',    sym:'σᵤ',  min:0.05, max:4.0,  step:0.05, dec:2 },
+    { key:'rx', label:'Rotation X', sym:'ψ',   min:-180, max:180,  step:1,    dec:0, unit:'°' },
+    { key:'ry', label:'Rotation Y', sym:'θ',   min:-180, max:180,  step:1,    dec:0, unit:'°' },
+    { key:'rz', label:'Rotation Z', sym:'φ',   min:-180, max:180,  step:1,    dec:0, unit:'°' },
 ];
 
 const PRESETS = [
-    { name:'Circular',     A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho: 0.0,  muX:0,    muY:0   },
-    { name:'Correlated',   A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho: 0.85, muX:0,    muY:0   },
-    { name:'Anti-corr',    A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho:-0.85, muX:0,    muY:0   },
-    { name:'Ridge X',      A:1.5,  sigmaX:2.5,  sigmaY:0.3,  rho: 0.0,  muX:0,    muY:0   },
-    { name:'Tilted Ridge', A:1.5,  sigmaX:2.2,  sigmaY:0.4,  rho: 0.85, muX:0,    muY:0   },
-    { name:'Sharp Peak',   A:2.8,  sigmaX:0.25, sigmaY:0.25, rho: 0.0,  muX:0,    muY:0   },
-    { name:'Off-center',   A:1.5,  sigmaX:0.9,  sigmaY:0.6,  rho: 0.5,  muX:1.5,  muY:1.0 },
-    { name:'Near-singular',A:1.0,  sigmaX:1.5,  sigmaY:1.5,  rho: 0.97, muX:0,    muY:0   },
+    { name:'Isotropic',   A:.9, sx:1.0,  sy:1.0,  sz:1.0,  rx:0,  ry:0,  rz:0  },
+    { name:'Flat disc',   A:.9, sx:2.5,  sy:2.5,  sz:0.07, rx:0,  ry:0,  rz:0  },
+    { name:'Needle',      A:.9, sx:0.1,  sy:0.1,  sz:3.5,  rx:0,  ry:0,  rz:0  },
+    { name:'Pancake',     A:.9, sx:3.0,  sy:1.2,  sz:0.12, rx:0,  ry:0,  rz:0  },
+    { name:'Tilted disc', A:.9, sx:2.5,  sy:2.5,  sz:0.07, rx:55, ry:20, rz:0  },
+    { name:'Oblate',      A:.8, sx:2.0,  sy:2.0,  sz:0.5,  rx:0,  ry:0,  rz:0  },
+    { name:'Prolate',     A:.8, sx:0.35, sy:0.35, sz:2.8,  rx:25, ry:40, rz:0  },
+    { name:'Slab',        A:.8, sx:3.0,  sy:0.25, sz:2.5,  rx:0,  ry:0,  rz:0  },
 ];
 
-const CMAPS = {
-    viridis: {
-        label: 'Viridis',
-        stops: [[.267,.005,.329],[.231,.322,.546],[.129,.569,.549],[.369,.788,.383],[.993,.906,.144]],
-    },
-    plasma: {
-        label: 'Plasma',
-        stops: [[.050,.030,.528],[.494,.012,.658],[.799,.161,.460],[.973,.463,.122],[.940,.975,.131]],
-    },
-    inferno: {
-        label: 'Inferno',
-        stops: [[.001,.000,.014],[.261,.043,.341],[.627,.136,.305],[.930,.549,.109],[.988,.998,.644]],
-    },
-    purple: {
-        label: 'Purple',
-        stops: [[.059,.090,.165],[.196,.184,.588],[.310,.275,.898],[.506,.549,.973],[.945,.941,1.0]],
-    },
-};
+const COLORS = [
+    { name:'Orange', rgb:[1.00, 0.55, 0.18] },
+    { name:'Red',    rgb:[0.95, 0.25, 0.25] },
+    { name:'Yellow', rgb:[0.98, 0.82, 0.12] },
+    { name:'Green',  rgb:[0.15, 0.85, 0.40] },
+    { name:'Cyan',   rgb:[0.05, 0.78, 0.90] },
+    { name:'Blue',   rgb:[0.22, 0.50, 0.98] },
+    { name:'Purple', rgb:[0.55, 0.40, 1.00] },
+    { name:'White',  rgb:[1.00, 1.00, 1.00] },
+];
 
-/* ═══════════════════════════════════════════════════
+const COLOR_HEX = ['#ff8c2e','#f23f3f','#f5cf1e','#26d966','#0dc8e6','#3880f9','#8c66ff','#ffffff'];
+
+/* ═══════════════════════════════════════════
    STATE
-═══════════════════════════════════════════════════ */
-const S = {
-    A:1.0, sigmaX:1.0, sigmaY:1.0, rho:0.0, muX:0.0, muY:0.0,
-    cmap: 'viridis',
-    wireframe: false, projection: false, grid: true, autoRotate: false,
-};
-let dirty = true;
+═══════════════════════════════════════════ */
+const G = { A:.9, sx:1.0, sy:1.0, sz:0.07, rx:0, ry:0, rz:0 };
+const gColor = new THREE.Color(1.0, 0.55, 0.18);
+let paramDirty = true;
+let currentS3 = new Float32Array(9); // cached 3D covariance matrix
 
-/* ═══════════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    THREE.JS SETUP
-═══════════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 const canvas = document.getElementById('gc');
 const wrap   = document.getElementById('wrap');
 
-const scene    = new THREE.Scene();
-scene.background = new THREE.Color(0x0d1117);
-scene.fog        = new THREE.FogExp2(0x0d1117, 0.025);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x070b12);
+scene.fog = new THREE.FogExp2(0x070b12, 0.018);
 
-const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
-camera.position.set(7, 9, 7);
+const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 300);
+camera.position.set(0, 3.5, 9);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -448,188 +313,237 @@ window.addEventListener('resize', resize);
 resize();
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 0.4, 0);
+controls.target.set(0, 0, 0);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
-controls.minDistance   = 2;
-controls.maxDistance   = 35;
-controls.maxPolarAngle = Math.PI * 0.88;
-controls.autoRotateSpeed = 1.5;
+controls.minDistance   = 0.5;
+controls.maxDistance   = 40;
+controls.autoRotateSpeed = 0.7;
 
-/* ── lights ── */
-scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+/* subtle ambient only — splat uses additive blending */
+scene.add(new THREE.AmbientLight(0x1a2233, 1));
 
-const sun = new THREE.DirectionalLight(0xffffff, 2.0);
-sun.position.set(5, 10, 8);
-scene.add(sun);
-
-const fill = new THREE.DirectionalLight(0x818cf8, 0.7);
-fill.position.set(-8, 4, 4);
-scene.add(fill);
-
-const rim = new THREE.DirectionalLight(0x06b6d4, 0.35);
-rim.position.set(0, -6, 5);
-scene.add(rim);
-
-/* ── grid helper (in XZ plane, Y is up) ── */
-const gridHelper = new THREE.GridHelper(DOMAIN*2 + 2, 24, 0x334155, 0x1e293b);
+/* grid */
+const gridHelper = new THREE.GridHelper(22, 22, 0x111a28, 0x111a28);
+gridHelper.position.y = -2.5;
 scene.add(gridHelper);
 
-/* ═══════════════════════════════════════════════════
-   SURFACE GEOMETRY
-   PlaneGeometry starts in XY plane; after rotateX(-PI/2)
-   it lies in XZ plane. We then displace vertex.y = f(x,z)
-═══════════════════════════════════════════════════ */
-const geo = new THREE.PlaneGeometry(DOMAIN*2, DOMAIN*2, SEGS, SEGS);
-geo.rotateX(-Math.PI / 2); // now in XZ plane, Y is height
-const N = geo.attributes.position.count;
+/* axes */
+const axes = new THREE.AxesHelper(2.5);
+axes.material.transparent = true;
+axes.material.opacity = 0.18;
+scene.add(axes);
 
-const colBuf = new Float32Array(N * 3);
-geo.setAttribute('color', new THREE.BufferAttribute(colBuf, 3));
+/* ═══════════════════════════════════════════
+   SPLAT SHADERS
+═══════════════════════════════════════════ */
+const splatVert = `
+    varying vec2 vUv;
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+`;
 
-const surfMat = new THREE.MeshPhongMaterial({
-    vertexColors: true,
+const splatFrag = `
+    uniform float uSxx, uSyy, uSxy;
+    uniform vec3  uColor;
+    uniform float uAlpha;
+    uniform float uSize;
+    varying vec2 vUv;
+
+    void main() {
+        vec2 p   = (vUv - 0.5) * uSize;
+        float det = uSxx * uSyy - uSxy * uSxy;
+        if (det < 1e-9) discard;
+        // Q = pᵀ Σ_2D⁻¹ p  (Σ_2D = [[Sxx,Sxy],[Sxy,Syy]])
+        float Q = (uSyy*p.x*p.x - 2.0*uSxy*p.x*p.y + uSxx*p.y*p.y) / det;
+        float g = uAlpha * exp(-0.5 * Q);
+        if (g < 0.004) discard;
+        // hot-core: peak goes white, body is the chosen color
+        vec3 col = mix(uColor, vec3(1.0), pow(clamp(g / uAlpha, 0.0, 1.0), 1.8) * 0.88);
+        gl_FragColor = vec4(col * g, g);
+    }
+`;
+
+const QSIZE = 26.0;
+
+/* main billboard splat */
+const billMat = new THREE.ShaderMaterial({
+    uniforms: {
+        uSxx:   { value: 1.0 },
+        uSyy:   { value: 1.0 },
+        uSxy:   { value: 0.0 },
+        uColor: { value: gColor.clone() },
+        uAlpha: { value: 0.9 },
+        uSize:  { value: QSIZE },
+    },
+    vertexShader:   splatVert,
+    fragmentShader: splatFrag,
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending,
     side: THREE.DoubleSide,
-    shininess: 90,
-    specular: new THREE.Color(0.15, 0.15, 0.25),
 });
-const surfMesh = new THREE.Mesh(geo, surfMat);
-scene.add(surfMesh);
+const billMesh = new THREE.Mesh(new THREE.PlaneGeometry(QSIZE, QSIZE), billMat);
+scene.add(billMesh);
 
-/* ── wireframe overlay (same geo) ── */
-const wireMat = new THREE.MeshBasicMaterial({
-    color: 0x0d1117, wireframe: true,
-    transparent: true, opacity: 0.0,
+/* floor shadow (same shader, XZ covariance of Σ_3D) */
+const floorMat = new THREE.ShaderMaterial({
+    uniforms: {
+        uSxx:   { value: 1.0 },
+        uSyy:   { value: 1.0 },
+        uSxy:   { value: 0.0 },
+        uColor: { value: gColor.clone() },
+        uAlpha: { value: 0.5 },
+        uSize:  { value: QSIZE },
+    },
+    vertexShader:   splatVert,
+    fragmentShader: splatFrag,
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending,
 });
-scene.add(new THREE.Mesh(geo, wireMat));
+const floorGeo = new THREE.PlaneGeometry(QSIZE, QSIZE);
+floorGeo.rotateX(-Math.PI / 2);
+const floorMesh = new THREE.Mesh(floorGeo, floorMat);
+floorMesh.position.y = -2.51;
+floorMesh.visible = false;
+scene.add(floorMesh);
 
-/* ── floor projection ── */
-const projGeo  = new THREE.PlaneGeometry(DOMAIN*2, DOMAIN*2, SEGS, SEGS);
-projGeo.rotateX(-Math.PI / 2);
-const projColBuf = new Float32Array(N * 3);
-projGeo.setAttribute('color', new THREE.BufferAttribute(projColBuf, 3));
-const projMat  = new THREE.MeshBasicMaterial({
-    vertexColors: true, side: THREE.DoubleSide,
-    transparent: true, opacity: 0.55,
+/* wireframe ellipsoid */
+const ellipMat = new THREE.MeshBasicMaterial({
+    color: 0x4f46e5, wireframe: true, transparent: true, opacity: 0.22, depthWrite: false,
 });
-const projMesh = new THREE.Mesh(projGeo, projMat);
-projMesh.position.y = -0.04;
-projMesh.visible    = false;
-scene.add(projMesh);
+const ellipMesh = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), ellipMat);
+ellipMesh.visible = false;
+scene.add(ellipMesh);
 
-/* ═══════════════════════════════════════════════════
-   GAUSSIAN MATH
-═══════════════════════════════════════════════════ */
-function gaussian(xi, zi) {
-    const dx = xi - S.muX, dz = zi - S.muY;
-    const sx = S.sigmaX, sy = S.sigmaY, rho = S.rho;
-    // Quadratic form using covariance matrix Σ = [[sx², ρ·sx·sy], [ρ·sx·sy, sy²]]
-    // Q = 1/(1−ρ²) · [(dx/sx)² − 2ρ(dx/sx)(dz/sy) + (dz/sy)²]
-    const rho2 = rho * rho;
-    const nx = dx / sx, ny = dz / sy;
-    const Q = (nx*nx - 2*rho*nx*ny + ny*ny) / (1 - rho2);
-    return S.A * Math.exp(-0.5 * Q);
+/* ═══════════════════════════════════════════
+   MATH HELPERS
+═══════════════════════════════════════════ */
+function buildSigma3D() {
+    /* Σ_3D = R · diag(sx²,sy²,sz²) · Rᵀ
+       R is column-major in Three.js: R[row][col] = re[col*4 + row] */
+    const euler = new THREE.Euler(G.rx*DEG, G.ry*DEG, G.rz*DEG, 'XYZ');
+    const re    = new THREE.Matrix4().makeRotationFromEuler(euler).elements;
+    const s2    = [G.sx*G.sx, G.sy*G.sy, G.sz*G.sz];
+    const S3    = new Float32Array(9);
+    for (let i = 0; i < 3; i++)
+        for (let j = 0; j < 3; j++)
+            S3[i*3+j] = s2[0]*re[i]*re[j] + s2[1]*re[4+i]*re[4+j] + s2[2]*re[8+i]*re[8+j];
+    return S3;
 }
 
-function sampleCmap(t) {
-    const stops = CMAPS[S.cmap].stops;
-    t = Math.max(0, Math.min(1, t));
-    const raw = t * (stops.length - 1);
-    const i   = Math.min(Math.floor(raw), stops.length - 2);
-    const f   = raw - i;
-    const a   = stops[i], b = stops[i+1];
-    return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f];
-}
-
-/* ═══════════════════════════════════════════════════
-   UPDATE SURFACE
-═══════════════════════════════════════════════════ */
-function updateSurface() {
-    const pos = geo.attributes.position;
-    const col = geo.attributes.color;
-    const ppos = projGeo.attributes.position;
-    const pcol = projGeo.attributes.color;
-
-    // First pass: compute all heights
-    const hs = new Float32Array(N);
-    let hmax = 0;
-    for (let i = 0; i < N; i++) {
-        const xi = pos.getX(i);
-        const zi = -pos.getZ(i);   // original y domain, flipped by rotateX
-        hs[i] = gaussian(xi, zi);
-        if (hs[i] > hmax) hmax = hs[i];
+function projectSplat(S3, mwi) {
+    /* Σ_2D = (W · Σ_3D · Wᵀ)[:2,:2]
+       W = upper-left 3×3 of camera.matrixWorldInverse (col-major)
+       W[i][k] = mwi[k*4 + i] */
+    function WS(i, j) {   // (W·Σ_3D)[i][j]
+        let s = 0;
+        for (let k = 0; k < 3; k++) s += mwi[k*4+i] * S3[k*3+j];
+        return s;
     }
-    const norm = hmax > 1e-7 ? hmax : 1;
-
-    // Second pass: apply heights + colors
-    for (let i = 0; i < N; i++) {
-        pos.setY(i, hs[i]);
-        const t   = hs[i] / norm;
-        const rgb = sampleCmap(t);
-        col.setXYZ(i, rgb[0], rgb[1], rgb[2]);
-
-        if (S.projection) {
-            pcol.setXYZ(i, rgb[0], rgb[1], rgb[2]);
-        }
+    function WSWT(i, j) { // (W·Σ_3D·Wᵀ)[i][j]
+        let s = 0;
+        for (let k = 0; k < 3; k++) s += WS(i,k) * mwi[k*4+j];
+        return s;
     }
-
-    pos.needsUpdate = true;
-    col.needsUpdate = true;
-    geo.computeVertexNormals();
-
-    if (S.projection) {
-        ppos.needsUpdate = false; // floor stays flat
-        pcol.needsUpdate = true;
-    }
-
-    updateFormula();
+    return { Sxx: WSWT(0,0), Syy: WSWT(1,1), Sxy: WSWT(0,1) };
 }
 
-/* ═══════════════════════════════════════════════════
-   FORMULA DISPLAY
-═══════════════════════════════════════════════════ */
-function updateFormula() {
-    const { A, sigmaX: sx, sigmaY: sy, rho } = S;
+/* ═══════════════════════════════════════════
+   UPDATE FUNCTIONS
+═══════════════════════════════════════════ */
+function updateParams() {
+    currentS3 = buildSigma3D();
 
-    // Main equation amplitude
-    document.getElementById('fA').textContent = A.toFixed(2);
+    /* ellipsoid scale + rotation */
+    const euler = new THREE.Euler(G.rx*DEG, G.ry*DEG, G.rz*DEG, 'XYZ');
+    ellipMesh.setRotationFromEuler(euler);
+    ellipMesh.scale.set(G.sx, G.sy, G.sz);
 
-    // Covariance matrix entries: Σ = [[sx², ρ·sx·sy], [ρ·sx·sy, sy²]]
-    const Sxx = sx * sx;
-    const Syy = sy * sy;
-    const Sxy = rho * sx * sy;
-    const det = Sxx * Syy - Sxy * Sxy; // = sx²·sy²·(1−ρ²)
+    /* floor shadow uses XZ slice of Σ_3D:
+       [[S3[0][0], S3[0][2]], [S3[2][0], S3[2][2]]]
+       Note: after floorGeo.rotateX(-PI/2), vUv.y maps to -z, so Sxy = -S3[0][2] */
+    floorMat.uniforms.uSxx.value = currentS3[0];       // Σ[x][x]
+    floorMat.uniforms.uSyy.value = currentS3[8];       // Σ[z][z]
+    floorMat.uniforms.uSxy.value = -currentS3[2];      // Σ[x][z] (sign flip for -z mapping)
+    floorMat.uniforms.uColor.value.copy(gColor);
+    floorMat.uniforms.uAlpha.value = G.A * 0.55;
 
-    document.getElementById('mSxx').textContent = Sxx.toFixed(3);
-    document.getElementById('mSyy').textContent = Syy.toFixed(3);
-    document.getElementById('mSxy').textContent = Sxy.toFixed(3);
-    document.getElementById('mSyx').textContent = Sxy.toFixed(3);
-    document.getElementById('mDet').textContent = det.toFixed(3);
-    document.getElementById('mRho').textContent = rho.toFixed(2);
+    /* live 3×3 matrix display */
+    const ids = ['m00','m01','m02','m10','m11','m12','m20','m21','m22'];
+    ids.forEach((id,i) => { const el = document.getElementById(id); if(el) el.textContent = currentS3[i].toFixed(3); });
+    const det = G.sx*G.sx * G.sy*G.sy * G.sz*G.sz;
+    const detEl = document.getElementById('mDet'); if(detEl) detEl.textContent = det.toFixed(4);
+    document.getElementById('fA').textContent = G.A.toFixed(2);
+
+    billMat.uniforms.uAlpha.value = G.A;
+    billMat.uniforms.uColor.value.copy(gColor);
+    ellipMat.color.copy(gColor);
+
+    paramDirty = false;
 }
 
-/* ═══════════════════════════════════════════════════
+/* ═══════════════════════════════════════════
+   ANIMATE
+═══════════════════════════════════════════ */
+function animate() {
+    requestAnimationFrame(animate);
+
+    if (paramDirty) updateParams();
+
+    /* billboard: reproject every frame as camera orbits */
+    camera.updateMatrixWorld();
+    const { Sxx, Syy, Sxy } = projectSplat(currentS3, camera.matrixWorldInverse.elements);
+    billMat.uniforms.uSxx.value = Sxx;
+    billMat.uniforms.uSyy.value = Syy;
+    billMat.uniforms.uSxy.value = Sxy;
+    billMesh.quaternion.copy(camera.quaternion); // always face camera
+
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+/* ═══════════════════════════════════════════
    BUILD UI
-═══════════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 
-// ── Sliders ──
+/* color swatches */
+const swatchWrap = document.getElementById('swatches');
+let activeS = null;
+COLORS.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'swatch' + (i === 0 ? ' active' : '');
+    btn.style.background = COLOR_HEX[i];
+    btn.title = c.name;
+    btn.addEventListener('click', () => {
+        gColor.setRGB(...c.rgb);
+        billMat.uniforms.uColor.value.copy(gColor);
+        floorMat.uniforms.uColor.value.copy(gColor);
+        ellipMat.color.copy(gColor);
+        document.querySelectorAll('.swatch').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+    swatchWrap.appendChild(btn);
+});
+
+/* sliders */
 const sliderEls = {};
-const container = document.getElementById('sliders');
+const sliderWrap = document.getElementById('sliders');
 
 SLIDER_DEFS.forEach(def => {
     const row = document.createElement('div');
     row.className = 'sl-row';
-    const pct = ((S[def.key] - def.min) / (def.max - def.min) * 100).toFixed(1);
+    const pct = ((G[def.key] - def.min) / (def.max - def.min) * 100).toFixed(1);
     row.innerHTML = `
         <div class="sl-top">
             <span class="sl-name">${def.label} <span class="sl-sym">${def.sym}</span></span>
-            <span class="sl-val" id="v-${def.key}">${S[def.key].toFixed(def.dec)}${def.unit||''}</span>
+            <span class="sl-val" id="v-${def.key}">${G[def.key].toFixed(def.dec)}${def.unit||''}</span>
         </div>
-        <input type="range" id="sl-${def.key}"
-               min="${def.min}" max="${def.max}" step="${def.step}" value="${S[def.key]}"
-               style="background:linear-gradient(to right,#4f46e5 ${pct}%,#30363d ${pct}%)">
+        <input type="range" id="sl-${def.key}" min="${def.min}" max="${def.max}" step="${def.step}" value="${G[def.key]}"
+               style="background:linear-gradient(to right,#4f46e5 ${pct}%,#1e2a3a ${pct}%)">
     `;
-    container.appendChild(row);
+    sliderWrap.appendChild(row);
 
     const inp = row.querySelector('input');
     const val = row.querySelector(`#v-${def.key}`);
@@ -637,139 +551,82 @@ SLIDER_DEFS.forEach(def => {
 
     inp.addEventListener('input', () => {
         const v = parseFloat(inp.value);
-        S[def.key] = v;
+        G[def.key] = v;
         val.textContent = v.toFixed(def.dec) + (def.unit||'');
-        setSliderGradient(inp, v, def);
-        dirty = true;
-        clearActivePreset();
+        const p = ((v - def.min) / (def.max - def.min) * 100).toFixed(1);
+        inp.style.background = `linear-gradient(to right,#4f46e5 ${p}%,#1e2a3a ${p}%)`;
+        paramDirty = true;
+        clearPreset();
     });
 });
-
-function setSliderGradient(inp, v, def) {
-    const pct = ((v - def.min) / (def.max - def.min) * 100).toFixed(1);
-    inp.style.background = `linear-gradient(to right,#4f46e5 ${pct}%,#30363d ${pct}%)`;
-}
 
 function syncSliders() {
     SLIDER_DEFS.forEach(def => {
         const { inp, val } = sliderEls[def.key];
-        inp.value = S[def.key];
-        val.textContent = S[def.key].toFixed(def.dec) + (def.unit||'');
-        setSliderGradient(inp, S[def.key], def);
+        inp.value = G[def.key];
+        val.textContent = G[def.key].toFixed(def.dec) + (def.unit||'');
+        const p = ((G[def.key] - def.min) / (def.max - def.min) * 100).toFixed(1);
+        inp.style.background = `linear-gradient(to right,#4f46e5 ${p}%,#1e2a3a ${p}%)`;
     });
 }
 
-// ── Presets ──
-const presetGrid = document.getElementById('presets');
-let activePBtn = null;
-
+/* presets */
+const presetWrap = document.getElementById('presets');
+let activeP = null;
 PRESETS.forEach(p => {
     const btn = document.createElement('button');
-    btn.className  = 'preset-btn';
+    btn.className = 'preset-btn';
     btn.textContent = p.name;
     btn.addEventListener('click', () => {
-        Object.assign(S, p);
+        Object.assign(G, p);
         syncSliders();
-        dirty = true;
-        if (activePBtn) activePBtn.classList.remove('active');
+        paramDirty = true;
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        activePBtn = btn;
+        activeP = btn;
     });
-    presetGrid.appendChild(btn);
+    presetWrap.appendChild(btn);
 });
+presetWrap.firstChild.classList.add('active');
+activeP = presetWrap.firstChild;
 
-// Activate first preset
-presetGrid.firstChild.classList.add('active');
-activePBtn = presetGrid.firstChild;
-
-function clearActivePreset() {
-    if (activePBtn) { activePBtn.classList.remove('active'); activePBtn = null; }
+function clearPreset() {
+    if (activeP) { activeP.classList.remove('active'); activeP = null; }
 }
 
-// ── Colormaps ──
-const cmapRow = document.getElementById('cmaps');
-let activeCBtn = null;
+/* toggles */
+document.getElementById('tWire').addEventListener('change', e => { ellipMesh.visible = e.target.checked; });
+document.getElementById('tFloor').addEventListener('change', e => { floorMesh.visible = e.target.checked; });
+document.getElementById('tGrid').addEventListener('change', e => { gridHelper.visible = e.target.checked; });
+document.getElementById('tAuto').addEventListener('change', e => { controls.autoRotate = e.target.checked; });
 
-Object.entries(CMAPS).forEach(([key, cmap]) => {
-    const btn = document.createElement('button');
-    btn.className = 'cmap-btn' + (key === S.cmap ? ' active' : '');
-
-    // Build CSS gradient from colormap stops for the swatch
-    const css = cmap.stops.map(([r,g,b]) => `rgb(${(r*255)|0},${(g*255)|0},${(b*255)|0})`).join(',');
-    btn.innerHTML = `
-        <div class="cmap-swatch" style="background:linear-gradient(to right,${css})"></div>
-        <span class="cmap-label">${cmap.label}</span>
-    `;
-    btn.addEventListener('click', () => {
-        S.cmap = key;
-        document.querySelectorAll('.cmap-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        dirty = true;
-    });
-    cmapRow.appendChild(btn);
-    if (key === S.cmap) activeCBtn = btn;
-});
-
-// ── Toggle switches ──
-document.getElementById('tWire').addEventListener('change', e => {
-    S.wireframe = e.target.checked;
-    wireMat.opacity = S.wireframe ? 0.22 : 0.0;
-});
-
-document.getElementById('tProj').addEventListener('change', e => {
-    S.projection       = e.target.checked;
-    projMesh.visible   = S.projection;
-    dirty = true;
-});
-
-document.getElementById('tGrid').addEventListener('change', e => {
-    gridHelper.visible = e.target.checked;
-});
-
-document.getElementById('tAuto').addEventListener('change', e => {
-    controls.autoRotate = e.target.checked;
-});
-
-// ── Reset camera ──
-const INIT_CAM = new THREE.Vector3(7, 9, 7);
-document.getElementById('btnResetCam').addEventListener('click', () => {
-    camera.position.copy(INIT_CAM);
-    controls.target.set(0, 0.4, 0);
+/* nav buttons */
+document.getElementById('btnReset').addEventListener('click', () => {
+    camera.position.set(0, 3.5, 9);
+    controls.target.set(0, 0, 0);
     controls.update();
 });
-
-// ── Screenshot ──
-document.getElementById('btnScreenshot').addEventListener('click', () => {
+document.getElementById('btnShot').addEventListener('click', () => {
     renderer.render(scene, camera);
-    const url = canvas.toDataURL('image/png');
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'gaussian-explorer.png';
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'gaussian-splat.png';
     a.click();
 });
 
-// ── Hint fade ──
+/* hint fade */
 let hintTimer;
 canvas.addEventListener('pointerdown', () => {
-    const h = document.getElementById('hint');
-    h.classList.add('fade');
+    document.getElementById('hint').classList.add('fade');
     clearTimeout(hintTimer);
-    hintTimer = setTimeout(() => h.classList.remove('fade'), 2500);
+    hintTimer = setTimeout(() => document.getElementById('hint').classList.remove('fade'), 2500);
 });
 
-/* ═══════════════════════════════════════════════════
-   ANIMATE
-═══════════════════════════════════════════════════ */
-function animate() {
-    requestAnimationFrame(animate);
-    if (dirty) { updateSurface(); dirty = false; }
-    controls.update();
-    renderer.render(scene, camera);
-}
-
-updateSurface();
+/* kick off */
+G.sx = 2.5; G.sy = 2.5; G.sz = 0.07; // start as flat disc
+syncSliders();
+updateParams();
 animate();
 </script>
-
 </body>
 </html>

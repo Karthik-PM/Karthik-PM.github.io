@@ -349,17 +349,36 @@ const splatFrag = `
     uniform vec3  uColor;
     uniform float uAlpha;
     uniform float uSize;
+    uniform vec3  uLightDir; // key light in camera/view space
     varying vec2 vUv;
 
     void main() {
-        vec2 p   = (vUv - 0.5) * uSize;
+        vec2 p    = (vUv - 0.5) * uSize;
         float det = uSxx * uSyy - uSxy * uSxy;
         if (det < 1e-9) discard;
-        // Q = pᵀ Σ_2D⁻¹ p  (Σ_2D = [[Sxx,Sxy],[Sxy,Syy]])
+
+        // Gaussian alpha
         float Q = (uSyy*p.x*p.x - 2.0*uSxy*p.x*p.y + uSxx*p.y*p.y) / det;
         float g = uAlpha * exp(-0.5 * Q);
         if (g < 0.004) discard;
-        gl_FragColor = vec4(uColor * g, g);
+
+        // Fake surface normal: treat the Gaussian as a height-field z = exp(-½Q).
+        // ∂z/∂p = −g · Σ⁻¹·p  →  normal ∝ (Σ⁻¹·p · g, 1) pointing toward camera.
+        // The g factor cancels after normalise, so just use Σ⁻¹·p for xy.
+        float id  = 1.0 / det;
+        vec2  Np  = vec2(uSyy*p.x - uSxy*p.y, uSxx*p.y - uSxy*p.x) * id;
+        vec3  N   = normalize(vec3(-Np * 0.6, 1.0));
+
+        // Phong shading (light dir in view space, updated from JS each frame)
+        float diff = max(dot(N, uLightDir), 0.0);
+        vec3  H    = normalize(uLightDir + vec3(0.0, 0.0, 1.0));
+        float spec = pow(max(dot(N, H), 0.0), 40.0) * 0.55;
+
+        // Soft fill light from the opposite side
+        float fill = max(dot(N, normalize(vec3(-uLightDir.x, -uLightDir.y, 0.4))), 0.0) * 0.22;
+
+        vec3 col = uColor * (0.18 + 0.82*diff + fill) + vec3(0.75, 0.82, 1.0)*spec;
+        gl_FragColor = vec4(col, g);
     }
 `;
 
@@ -368,19 +387,21 @@ const QSIZE = 26.0;
 /* main billboard splat */
 const billMat = new THREE.ShaderMaterial({
     uniforms: {
-        uSxx:   { value: 1.0 },
-        uSyy:   { value: 1.0 },
-        uSxy:   { value: 0.0 },
-        uColor: { value: gColor.clone() },
-        uAlpha: { value: 0.9 },
-        uSize:  { value: QSIZE },
+        uSxx:      { value: 1.0 },
+        uSyy:      { value: 1.0 },
+        uSxy:      { value: 0.0 },
+        uColor:    { value: gColor.clone() },
+        uAlpha:    { value: 0.9 },
+        uSize:     { value: QSIZE },
+        uLightDir: { value: new THREE.Vector3(0.6, 0.8, 0.7) },
     },
     vertexShader:   splatVert,
     fragmentShader: splatFrag,
     transparent: true, depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    side: THREE.DoubleSide,
+    blending: THREE.NormalBlending,
+    side: THREE.FrontSide,
 });
+billMesh.renderOrder = 2;
 const billMesh = new THREE.Mesh(new THREE.PlaneGeometry(QSIZE, QSIZE), billMat);
 scene.add(billMesh);
 
@@ -484,18 +505,26 @@ function updateParams() {
 /* ═══════════════════════════════════════════
    ANIMATE
 ═══════════════════════════════════════════ */
+const _worldLight = new THREE.Vector3();
+
 function animate() {
     requestAnimationFrame(animate);
 
     if (paramDirty) updateParams();
 
-    /* billboard: reproject every frame as camera orbits */
+    /* billboard: reproject + re-light every frame as camera orbits */
     camera.updateMatrixWorld();
-    const { Sxx, Syy, Sxy } = projectSplat(currentS3, camera.matrixWorldInverse.elements);
+    const mwi = camera.matrixWorldInverse.elements;
+    const { Sxx, Syy, Sxy } = projectSplat(currentS3, mwi);
     billMat.uniforms.uSxx.value = Sxx;
     billMat.uniforms.uSyy.value = Syy;
     billMat.uniforms.uSxy.value = Sxy;
     billMesh.quaternion.copy(camera.quaternion); // always face camera
+
+    /* transform world-space key light into view/camera space so shading
+       responds to orbit: world light at (1.5, 2, 1) normalised */
+    _worldLight.set(1.5, 2.0, 1.0).normalize().transformDirection(camera.matrixWorldInverse);
+    billMat.uniforms.uLightDir.value.copy(_worldLight);
 
     controls.update();
     renderer.render(scene, camera);

@@ -119,6 +119,36 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        /* Covariance matrix display */
+        .cov-section { margin-top: .6rem; }
+        .cov-title {
+            font-size: .62rem; color: var(--muted); margin-bottom: .35rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .cov-matrix-wrap {
+            display: flex; align-items: center; gap: .35rem;
+        }
+        .cov-eq-label { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: #a5b4fc; }
+        .cov-bracket {
+            font-size: 2rem; line-height: 1; color: rgba(129,140,248,.5);
+            font-weight: 100; user-select: none;
+        }
+        .cov-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: .18rem .7rem;
+        }
+        .cov-cell {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem; color: #fbbf24; font-weight: 500;
+            text-align: right; min-width: 38px;
+        }
+        .cov-cell.off { color: #f472b6; }
+        .det-line {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .62rem; color: var(--muted); margin-top: .35rem;
+        }
+        .det-line .fv { font-size: .62rem; }
+
         /* Sliders */
         .sl-row { margin-bottom: .75rem; }
         .sl-top {
@@ -257,9 +287,25 @@
         <div class="pblock">
             <div class="pblock-label">Bivariate Gaussian</div>
             <div class="formula-wrap">
-                <div class="formula-line">f(x,y) = <span class="fv" id="fA">1.00</span> · exp(−½Q)</div>
-                <div class="formula-line" id="fQ" style="color:#94a3b8;font-size:.67rem;margin-top:.25rem;">Q = x²/σₓ² + y²/σᵧ²</div>
-                <div class="formula-note" id="fNote" style="display:none;"></div>
+                <div class="formula-line">f(x,y) = <span class="fv" id="fA">1.00</span> · exp(−½ xᵀΣ⁻¹x)</div>
+                <div class="formula-line" id="fQ" style="color:#94a3b8;font-size:.65rem;margin-top:.2rem;line-height:1.5;">
+                    Q = 1/(1−ρ²)·[(Δx/σₓ)² − 2ρ(Δx/σₓ)(Δy/σᵧ) + (Δy/σᵧ)²]
+                </div>
+                <!-- Covariance matrix -->
+                <div class="cov-section">
+                    <div class="cov-title">Σ (covariance matrix):</div>
+                    <div class="cov-matrix-wrap">
+                        <span class="cov-bracket">⎡<br>⎣</span>
+                        <div class="cov-grid">
+                            <span class="cov-cell" id="mSxx">1.00</span>
+                            <span class="cov-cell off" id="mSxy">0.00</span>
+                            <span class="cov-cell off" id="mSyx">0.00</span>
+                            <span class="cov-cell" id="mSyy">1.00</span>
+                        </div>
+                        <span class="cov-bracket">⎤<br>⎦</span>
+                    </div>
+                    <div class="det-line">det(Σ) = <span class="fv" id="mDet">1.00</span> &nbsp;·&nbsp; ρ = <span class="fv" id="mRho">0.00</span></div>
+                </div>
             </div>
         </div>
 
@@ -328,23 +374,23 @@ const SEGS   = 110;   // grid resolution
 const DOMAIN = 5;     // surface spans [−5, 5] × [−5, 5]
 
 const SLIDER_DEFS = [
-    { key:'A',        label:'Amplitude', sym:'A',  min:0.1,  max:3.0,  step:0.05, dec:2 },
-    { key:'sigmaX',   label:'Width X',   sym:'σₓ', min:0.1,  max:3.0,  step:0.05, dec:2 },
-    { key:'sigmaY',   label:'Width Y',   sym:'σᵧ', min:0.1,  max:3.0,  step:0.05, dec:2 },
-    { key:'muX',      label:'Center X',  sym:'μₓ', min:-3.0, max:3.0,  step:0.05, dec:2 },
-    { key:'muY',      label:'Center Y',  sym:'μᵧ', min:-3.0, max:3.0,  step:0.05, dec:2 },
-    { key:'thetaDeg', label:'Rotation',  sym:'θ',  min:-90,  max:90,   step:1,    dec:0, unit:'°' },
+    { key:'A',      label:'Amplitude',    sym:'A',  min:0.1,   max:3.0,  step:0.05, dec:2 },
+    { key:'sigmaX', label:'Std dev X',    sym:'σₓ', min:0.1,   max:3.0,  step:0.05, dec:2 },
+    { key:'sigmaY', label:'Std dev Y',    sym:'σᵧ', min:0.1,   max:3.0,  step:0.05, dec:2 },
+    { key:'rho',    label:'Correlation',  sym:'ρ',  min:-0.99, max:0.99, step:0.01, dec:2 },
+    { key:'muX',    label:'Center X',     sym:'μₓ', min:-3.0,  max:3.0,  step:0.05, dec:2 },
+    { key:'muY',    label:'Center Y',     sym:'μᵧ', min:-3.0,  max:3.0,  step:0.05, dec:2 },
 ];
 
 const PRESETS = [
-    { name:'Standard',   A:1.0,  sigmaX:1.0,  sigmaY:1.0,  muX:0,    muY:0,   thetaDeg:0  },
-    { name:'Ridge',      A:1.5,  sigmaX:0.25, sigmaY:2.5,  muX:0,    muY:0,   thetaDeg:0  },
-    { name:'Rotated',    A:1.5,  sigmaX:0.25, sigmaY:2.5,  muX:0,    muY:0,   thetaDeg:45 },
-    { name:'Sharp Peak', A:2.8,  sigmaX:0.2,  sigmaY:0.2,  muX:0,    muY:0,   thetaDeg:0  },
-    { name:'Wide Dome',  A:0.65, sigmaX:2.5,  sigmaY:2.5,  muX:0,    muY:0,   thetaDeg:0  },
-    { name:'Off-center', A:1.5,  sigmaX:0.8,  sigmaY:0.8,  muX:1.5,  muY:1.0, thetaDeg:0  },
-    { name:'Skewed',     A:1.2,  sigmaX:2.0,  sigmaY:0.4,  muX:-0.5, muY:0.5, thetaDeg:30 },
-    { name:'Pinched',    A:1.0,  sigmaX:0.4,  sigmaY:2.8,  muX:0,    muY:0,   thetaDeg:70 },
+    { name:'Circular',     A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho: 0.0,  muX:0,    muY:0   },
+    { name:'Correlated',   A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho: 0.85, muX:0,    muY:0   },
+    { name:'Anti-corr',    A:1.0,  sigmaX:1.0,  sigmaY:1.0,  rho:-0.85, muX:0,    muY:0   },
+    { name:'Ridge X',      A:1.5,  sigmaX:2.5,  sigmaY:0.3,  rho: 0.0,  muX:0,    muY:0   },
+    { name:'Tilted Ridge', A:1.5,  sigmaX:2.2,  sigmaY:0.4,  rho: 0.85, muX:0,    muY:0   },
+    { name:'Sharp Peak',   A:2.8,  sigmaX:0.25, sigmaY:0.25, rho: 0.0,  muX:0,    muY:0   },
+    { name:'Off-center',   A:1.5,  sigmaX:0.9,  sigmaY:0.6,  rho: 0.5,  muX:1.5,  muY:1.0 },
+    { name:'Near-singular',A:1.0,  sigmaX:1.5,  sigmaY:1.5,  rho: 0.97, muX:0,    muY:0   },
 ];
 
 const CMAPS = {
@@ -370,7 +416,7 @@ const CMAPS = {
    STATE
 ═══════════════════════════════════════════════════ */
 const S = {
-    A:1.0, sigmaX:1.0, sigmaY:1.0, muX:0.0, muY:0.0, thetaDeg:0.0,
+    A:1.0, sigmaX:1.0, sigmaY:1.0, rho:0.0, muX:0.0, muY:0.0,
     cmap: 'viridis',
     wireframe: false, projection: false, grid: true, autoRotate: false,
 };
@@ -475,12 +521,14 @@ scene.add(projMesh);
    GAUSSIAN MATH
 ═══════════════════════════════════════════════════ */
 function gaussian(xi, zi) {
-    const theta = S.thetaDeg * (Math.PI / 180);
-    const c = Math.cos(theta), s = Math.sin(theta);
     const dx = xi - S.muX, dz = zi - S.muY;
-    const xr = dx * c + dz * s;
-    const zr = -dx * s + dz * c;
-    return S.A * Math.exp(-0.5 * (xr*xr / (S.sigmaX*S.sigmaX) + zr*zr / (S.sigmaY*S.sigmaY)));
+    const sx = S.sigmaX, sy = S.sigmaY, rho = S.rho;
+    // Quadratic form using covariance matrix Σ = [[sx², ρ·sx·sy], [ρ·sx·sy, sy²]]
+    // Q = 1/(1−ρ²) · [(dx/sx)² − 2ρ(dx/sx)(dz/sy) + (dz/sy)²]
+    const rho2 = rho * rho;
+    const nx = dx / sx, ny = dz / sy;
+    const Q = (nx*nx - 2*rho*nx*ny + ny*ny) / (1 - rho2);
+    return S.A * Math.exp(-0.5 * Q);
 }
 
 function sampleCmap(t) {
@@ -541,31 +589,23 @@ function updateSurface() {
    FORMULA DISPLAY
 ═══════════════════════════════════════════════════ */
 function updateFormula() {
-    document.getElementById('fA').textContent = S.A.toFixed(2);
+    const { A, sigmaX: sx, sigmaY: sy, rho } = S;
 
-    const θ  = Math.abs(S.thetaDeg) > 0.5;
-    const μ0 = Math.abs(S.muX) < 0.01 && Math.abs(S.muY) < 0.01;
-    const sx = S.sigmaX.toFixed(2), sy = S.sigmaY.toFixed(2);
+    // Main equation amplitude
+    document.getElementById('fA').textContent = A.toFixed(2);
 
-    let q;
-    if (!θ && μ0) {
-        q = `Q = x²/${sx}² + y²/${sy}²`;
-    } else if (!θ) {
-        const mx = S.muX.toFixed(2), my = S.muY.toFixed(2);
-        q = `Q = (x−${mx})²/${sx}² + (y−${my})²/${sy}²`;
-    } else {
-        q = `Q = x'²/${sx}² + y'²/${sy}²`;
-    }
+    // Covariance matrix entries: Σ = [[sx², ρ·sx·sy], [ρ·sx·sy, sy²]]
+    const Sxx = sx * sx;
+    const Syy = sy * sy;
+    const Sxy = rho * sx * sy;
+    const det = Sxx * Syy - Sxy * Sxy; // = sx²·sy²·(1−ρ²)
 
-    document.getElementById('fQ').textContent = q;
-
-    const note = document.getElementById('fNote');
-    if (θ) {
-        note.style.display = 'block';
-        note.textContent   = `x', y' rotated by θ = ${S.thetaDeg.toFixed(0)}°`;
-    } else {
-        note.style.display = 'none';
-    }
+    document.getElementById('mSxx').textContent = Sxx.toFixed(3);
+    document.getElementById('mSyy').textContent = Syy.toFixed(3);
+    document.getElementById('mSxy').textContent = Sxy.toFixed(3);
+    document.getElementById('mSyx').textContent = Sxy.toFixed(3);
+    document.getElementById('mDet').textContent = det.toFixed(3);
+    document.getElementById('mRho').textContent = rho.toFixed(2);
 }
 
 /* ═══════════════════════════════════════════════════

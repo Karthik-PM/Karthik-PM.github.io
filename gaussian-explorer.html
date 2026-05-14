@@ -295,7 +295,6 @@ const wrap   = document.getElementById('wrap');
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x070b12);
-scene.fog = new THREE.FogExp2(0x070b12, 0.018);
 
 const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 300);
 camera.position.set(0, 3.5, 9);
@@ -360,9 +359,7 @@ const splatFrag = `
         float Q = (uSyy*p.x*p.x - 2.0*uSxy*p.x*p.y + uSxx*p.y*p.y) / det;
         float g = uAlpha * exp(-0.5 * Q);
         if (g < 0.004) discard;
-        // hot-core: peak goes white, body is the chosen color
-        vec3 col = mix(uColor, vec3(1.0), pow(clamp(g / uAlpha, 0.0, 1.0), 1.8) * 0.88);
-        gl_FragColor = vec4(col * g, g);
+        gl_FragColor = vec4(uColor * g, g);
     }
 `;
 

@@ -16,88 +16,131 @@
     <meta name="google-site-verification" content="2ODSDPGhtbe_bnU8ByWyvK51F-7ZtYKOtB1jE7xNLig">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary:       #4f46e5;
-            --primary-light: #818cf8;
-            --primary-dark:  #3730a3;
-            --slate-900: #0f172a;
-            --slate-800: #1e293b;
-            --slate-700: #334155;
-            --slate-500: #64748b;
-            --slate-400: #94a3b8;
-            --slate-300: #cbd5e1;
-            --slate-200: #e2e8f0;
-            --slate-100: #f1f5f9;
-            --slate-50:  #f8fafc;
+            /* ─── Vintage Academic palette ─── */
+            --paper:      #f7efd9;   /* page parchment            */
+            --paper-deep: #efe4c6;   /* darker parchment          */
+            --card:       #fcf7e8;   /* card / plate stock        */
+            --ink:        #2f2418;   /* main ink                  */
+            --ink-soft:   #574632;   /* body text                 */
+            --ink-faint:  #8a765a;   /* captions / meta           */
+            --gold:       #9a7635;   /* brass accent              */
+            --gold-light: #c2a15a;   /* lighter brass             */
+            --green:      #3f5540;   /* deep bottle green         */
+            --green-deep: #2c3d2d;
+            --oxblood:    #7a3b30;   /* deep red accent           */
+            --rule:       #cdb888;   /* sepia hairline            */
+            --rule-soft:  #e2d4ad;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--slate-50);
-            color: var(--slate-800);
-            line-height: 1.7;
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            background:
+                radial-gradient(ellipse at 20% 0%, #fbf4de 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 100%, #f2e8ca 0%, transparent 55%),
+                var(--paper);
+            color: var(--ink-soft);
+            font-size: 1.08rem;
+            line-height: 1.72;
         }
+
+        ::selection { background: rgba(154,118,53,.24); }
 
         /* ─── HERO ─────────────────────────────────────────── */
         .hero {
-            background: linear-gradient(140deg, #0f172a 0%, #1e1b4b 55%, #0f172a 100%);
+            background:
+                radial-gradient(ellipse at 50% 120%, rgba(194,161,90,.18) 0%, transparent 60%),
+                linear-gradient(160deg, #2c3d2d 0%, #3f5540 50%, #26331f 100%);
             padding: 4.5rem 2rem 3.5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 3px double var(--gold);
         }
+        /* faint engraved texture */
         .hero::before {
             content: '';
             position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse at 25% 60%, rgba(99,102,241,.18) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 25%, rgba(6,182,212,.12)   0%, transparent 50%);
+            background-image:
+                repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px);
+            pointer-events: none;
+        }
+        /* ornamental corner frame */
+        .hero::after {
+            content: '';
+            position: absolute; inset: 14px;
+            border: 1px solid rgba(194,161,90,.4);
             pointer-events: none;
         }
         .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
 
         .profile-img {
-            width: 150px; height: 150px;
+            width: 148px; height: 148px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(129,140,248,.5);
-            box-shadow: 0 0 0 6px rgba(79,70,229,.15), 0 20px 50px rgba(0,0,0,.45);
-            margin-bottom: 1.5rem;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 0 0 7px rgba(247,239,217,.08), 0 0 0 8px rgba(194,161,90,.35), 0 18px 44px rgba(0,0,0,.5);
+            margin-bottom: 1.6rem;
+            filter: sepia(.18) saturate(.94);
         }
 
+        .hero .eyebrow {
+            font-family: 'EB Garamond', serif;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            letter-spacing: .38em;
+            font-size: .72rem;
+            margin-bottom: 1rem;
+            padding-left: .38em;
+        }
         .hero h1 {
-            color: #fff;
-            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-family: 'Playfair Display', serif;
+            color: #f7efd9;
+            font-size: clamp(1.9rem, 5vw, 2.9rem);
             font-weight: 700;
-            letter-spacing: -.03em;
-            margin-bottom: .4rem;
+            letter-spacing: .01em;
+            line-height: 1.12;
+            margin-bottom: .55rem;
         }
-        .hero .subtitle { color: #a5b4fc; font-size: .95rem; margin-bottom: .2rem; }
-        .hero .location { color: var(--slate-400); font-size: .85rem; margin-bottom: 2rem; }
+        .hero .subtitle {
+            color: #e6dcc0;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: .2rem;
+        }
+        .hero .location { color: rgba(230,220,192,.7); font-size: .95rem; margin-bottom: 1.8rem; }
 
-        .hero-social { display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap; }
+        /* little ornament between title and social */
+        .ornament {
+            color: var(--gold-light);
+            font-size: 1rem;
+            letter-spacing: .5em;
+            margin: 0 0 1.6rem;
+            opacity: .9;
+        }
+
+        .hero-social { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
         .hero-social a {
-            color: #e2e8f0;
+            color: #ece1c4;
             text-decoration: none;
-            padding: .45rem .95rem;
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 8px;
-            font-size: .82rem; font-weight: 500;
-            background: rgba(255,255,255,.05);
-            backdrop-filter: blur(6px);
-            display: inline-flex; align-items: center; gap: .4rem;
+            padding: .45rem 1rem;
+            border: 1px solid rgba(194,161,90,.45);
+            border-radius: 2px;
+            font-size: .9rem; letter-spacing: .02em;
+            background: rgba(247,239,217,.04);
+            display: inline-flex; align-items: center; gap: .45rem;
             transition: all .2s;
         }
         .hero-social a:hover {
-            background: rgba(99,102,241,.28);
-            border-color: rgba(129,140,248,.55);
+            background: rgba(194,161,90,.2);
+            border-color: var(--gold-light);
             color: #fff;
             transform: translateY(-2px);
         }
@@ -105,164 +148,236 @@
         /* ─── STICKY NAV ───────────────────────────────────── */
         .sticky-nav {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(255,255,255,.92);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--slate-100);
-            padding: .6rem 1.5rem;
-            display: flex; gap: .3rem; justify-content: center; flex-wrap: wrap;
-            box-shadow: 0 1px 6px rgba(0,0,0,.04);
+            background: rgba(243,234,208,.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--rule);
+            box-shadow: 0 1px 0 var(--rule-soft), 0 2px 8px rgba(90,70,40,.08);
+            padding: .55rem 1.5rem;
+            display: flex; gap: .2rem; justify-content: center; flex-wrap: wrap;
         }
         .sticky-nav a {
-            color: var(--slate-500);
+            color: var(--ink-soft);
             text-decoration: none;
-            padding: .35rem .8rem;
-            border-radius: 6px;
-            font-size: .82rem; font-weight: 500;
+            padding: .3rem .85rem;
+            font-size: .95rem;
+            letter-spacing: .02em;
+            border-bottom: 1px solid transparent;
             transition: all .18s;
         }
-        .sticky-nav a:hover { color: var(--primary); background: #ede9fe; }
+        .sticky-nav a:hover { color: var(--oxblood); border-bottom-color: var(--gold); }
 
         /* ─── MAIN ─────────────────────────────────────────── */
-        .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+        .main { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
 
         /* ─── SECTION ──────────────────────────────────────── */
-        .section { margin-bottom: 2.5rem; }
+        .section { margin-bottom: 3rem; }
 
         .section-title {
-            font-size: 1.05rem; font-weight: 700;
-            color: var(--slate-800);
-            margin-bottom: 1.1rem;
-            padding-bottom: .5rem;
-            border-bottom: 2px solid var(--slate-100);
-            display: flex; align-items: center; gap: .55rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55rem; font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1.3rem;
+            display: flex; align-items: center; gap: .7rem;
+            position: relative;
         }
         .section-title .icon {
-            width: 26px; height: 26px;
-            background: linear-gradient(135deg, #4f46e5, #818cf8);
-            border-radius: 6px;
+            width: 30px; height: 30px;
+            background: linear-gradient(150deg, var(--green), var(--green-deep));
+            border: 1px solid var(--gold);
+            border-radius: 3px;
             display: inline-flex; align-items: center; justify-content: center;
-            color: #fff; font-size: .72rem; flex-shrink: 0;
+            color: var(--gold-light); font-size: .8rem; flex-shrink: 0;
+        }
+        /* decorative rule trailing the section title */
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 0;
+            border-top: 1px solid var(--rule);
+            box-shadow: 0 3px 0 -2px var(--rule-soft);
+            margin-left: .4rem;
         }
 
-        /* ─── CARD ─────────────────────────────────────────── */
+        /* ─── CARD (plate) ─────────────────────────────────── */
         .card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 1.4rem 1.5rem;
-            border: 1px solid var(--slate-100);
-            box-shadow: 0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.04);
-            margin-bottom: 1rem;
-            transition: box-shadow .2s, transform .2s;
+            background: var(--card);
+            border: 1px solid var(--rule);
+            border-radius: 3px;
+            padding: 1.5rem 1.7rem;
+            box-shadow: 0 1px 0 #fffdf5 inset, 0 2px 10px rgba(90,70,40,.09);
+            margin-bottom: 1.1rem;
+            position: relative;
+            transition: box-shadow .25s, transform .25s;
         }
-        .card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-1px); }
+        .card::before {
+            content: '';
+            position: absolute; inset: 5px;
+            border: 1px solid var(--rule-soft);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        .card:hover { box-shadow: 0 1px 0 #fffdf5 inset, 0 8px 24px rgba(90,70,40,.16); transform: translateY(-2px); }
+        .card > * { position: relative; }
 
         /* ─── ABOUT ────────────────────────────────────────── */
-        .about-text { font-size: .92rem; color: var(--slate-700); }
+        .about-text { font-size: 1.12rem; color: var(--ink-soft); }
+        .about-text::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.4rem;
+            line-height: .82;
+            font-weight: 700;
+            color: var(--oxblood);
+            margin: .12rem .6rem 0 0;
+        }
 
         /* ─── EDUCATION ────────────────────────────────────── */
-        .edu-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .edu-item { display: flex; gap: 1.1rem; align-items: flex-start; }
         .edu-icon {
-            width: 38px; height: 38px; flex-shrink: 0;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            width: 40px; height: 40px; flex-shrink: 0;
+            border-radius: 3px;
+            background: linear-gradient(150deg, var(--green), var(--green-deep));
+            border: 1px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: .95rem; margin-top: .1rem;
+            color: var(--gold-light); font-size: 1rem; margin-top: .15rem;
         }
-        .edu-info h3 { font-size: .9rem; font-weight: 600; color: var(--slate-800); margin-bottom: .15rem; }
-        .edu-info .inst { font-size: .8rem; color: var(--slate-500); }
+        .edu-info h3 { font-family: 'Playfair Display', serif; font-size: 1.12rem; font-weight: 600; color: var(--ink); margin-bottom: .2rem; }
+        .edu-info .inst { font-size: .95rem; color: var(--ink-faint); font-style: italic; }
 
         /* ─── BUTTONS ──────────────────────────────────────── */
         .btn {
-            display: inline-flex; align-items: center; gap: .4rem;
-            padding: .48rem 1.05rem;
-            border-radius: 8px;
-            font-size: .82rem; font-weight: 500;
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: .5rem 1.15rem;
+            border-radius: 2px;
+            font-size: .92rem; letter-spacing: .02em;
             text-decoration: none;
             transition: all .2s;
-            margin-top: .9rem; margin-right: .5rem;
+            margin-top: 1rem; margin-right: .55rem;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #4f46e5, #6366f1);
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(79,70,229,.3);
+            background: linear-gradient(150deg, var(--green), var(--green-deep));
+            color: #f4ead0;
+            border: 1px solid var(--gold);
+            box-shadow: 0 2px 6px rgba(44,61,45,.3);
         }
         .btn-primary:hover {
-            box-shadow: 0 4px 16px rgba(79,70,229,.4);
+            box-shadow: 0 4px 14px rgba(44,61,45,.4);
             transform: translateY(-1px);
+            color: #fff;
         }
         .btn-outline {
-            border: 1px solid var(--slate-300);
-            color: var(--slate-700);
-            background: #fff;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
         }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: #f5f3ff; }
+        .btn-outline:hover { background: rgba(154,118,53,.1); color: var(--oxblood); border-color: var(--oxblood); }
 
         /* ─── TAGS ─────────────────────────────────────────── */
         .tag {
             display: inline-block;
-            padding: .18rem .55rem;
-            border-radius: 99px;
-            font-size: .72rem; font-weight: 500;
-            background: #ede9fe; color: #5b21b6;
-            margin: .15rem .1rem;
+            padding: .16rem .6rem;
+            border-radius: 2px;
+            font-size: .82rem; letter-spacing: .03em;
+            font-variant: small-caps;
+            background: rgba(154,118,53,.12);
+            border: 1px solid rgba(154,118,53,.32);
+            color: #7a5c26;
+            margin: .18rem .12rem;
         }
-        .tag-cyan  { background: #ecfeff; color: #0891b2; }
-        .tag-green { background: #f0fdf4; color: #166534; }
-        .tag-amber { background: #fffbeb; color: #92400e; }
+        .tag-cyan  { background: rgba(63,85,64,.12);  border-color: rgba(63,85,64,.34);  color: var(--green); }
+        .tag-green { background: rgba(63,85,64,.12);  border-color: rgba(63,85,64,.34);  color: var(--green); }
+        .tag-amber { background: rgba(122,59,48,.1);  border-color: rgba(122,59,48,.3);  color: var(--oxblood); }
 
         /* ─── RESEARCH BULLET LIST ──────────────────────────── */
-        .bullet-list { padding-left: 1.1rem; margin-top: .5rem; }
-        .bullet-list li { font-size: .875rem; color: var(--slate-700); margin-bottom: .3rem; }
+        .bullet-list { list-style: none; margin-top: .6rem; }
+        .bullet-list li {
+            font-size: 1.04rem; color: var(--ink-soft);
+            margin-bottom: .35rem; padding-left: 1.4rem; position: relative;
+        }
+        .bullet-list li::before {
+            content: '\275D';
+            position: absolute; left: 0; top: 0;
+            color: var(--gold); font-size: .95rem;
+        }
 
         /* ─── PRODUCT CARD ─────────────────────────────────── */
-        .product-grid { display: grid; gap: 1rem; }
-
-        .product-inner { display: flex; gap: 1.2rem; align-items: flex-start; }
-
+        .product-grid { display: grid; gap: 1.1rem; }
+        .product-inner { display: flex; gap: 1.3rem; align-items: flex-start; }
         .product-icon {
-            width: 54px; height: 54px; flex-shrink: 0;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+            width: 56px; height: 56px; flex-shrink: 0;
+            border-radius: 4px;
+            background: linear-gradient(150deg, var(--green), var(--green-deep));
+            border: 1px solid var(--gold);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 14px rgba(0,0,0,.2);
+            font-size: 1.55rem;
+            box-shadow: 0 4px 12px rgba(44,61,45,.25);
         }
-
         .product-body { flex: 1; min-width: 0; }
-        .product-body h3 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; color: var(--slate-800); }
-        .product-body .product-sub { font-size: .78rem; color: var(--slate-500); margin-bottom: .65rem; }
-
-        .product-features { display: flex; flex-wrap: wrap; gap: .25rem; margin-bottom: .65rem; }
-
-        .platform-row { display: flex; gap: .45rem; flex-wrap: wrap; }
+        .product-body h3 { font-family: 'Playfair Display', serif; font-size: 1.18rem; font-weight: 700; margin-bottom: .25rem; color: var(--ink); }
+        .product-body .product-sub { font-size: 1.02rem; color: var(--ink-faint); font-style: italic; margin-bottom: .7rem; }
+        .product-features { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .7rem; }
+        .platform-row { display: flex; gap: .5rem; flex-wrap: wrap; }
         .platform-badge {
-            display: inline-flex; align-items: center; gap: .3rem;
-            padding: .22rem .6rem;
-            border-radius: 6px; font-size: .72rem; font-weight: 500;
-            border: 1px solid var(--slate-200);
-            color: var(--slate-600); background: var(--slate-50);
+            display: inline-flex; align-items: center; gap: .35rem;
+            padding: .22rem .65rem;
+            border-radius: 2px; font-size: .82rem; letter-spacing: .02em;
+            border: 1px solid var(--rule);
+            color: var(--ink-faint); background: rgba(247,239,217,.6);
         }
+
+        /* ─── FUNDING PLATES ───────────────────────────────── */
+        .fund-box {
+            display: flex; align-items: center; gap: .7rem;
+            padding: .6rem 1rem;
+            border: 1px solid var(--rule);
+            border-radius: 2px;
+            background: rgba(247,239,217,.7);
+        }
+        .fund-box.accent { background: rgba(63,85,64,.08); border-color: rgba(63,85,64,.28); }
+        .fund-icon {
+            width: 32px; height: 32px; border-radius: 3px;
+            background: linear-gradient(150deg, var(--green), var(--green-deep));
+            border: 1px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold-light); font-size: .8rem; flex-shrink: 0;
+        }
+        .fund-label {
+            font-size: .74rem; font-variant: small-caps; letter-spacing: .08em;
+            color: var(--ink-faint); margin-bottom: .05rem;
+        }
+        .fund-name { font-size: 1rem; font-weight: 600; color: var(--ink); }
+        .fund-connector {
+            display: flex; align-items: center; gap: .5rem;
+            padding: .1rem 1rem; font-style: italic;
+            font-size: .9rem; color: var(--ink-faint);
+        }
+        .fund-connector .stem { width: 1px; height: 16px; background: var(--rule); margin-left: 15px; }
 
         /* ─── DIVIDER ──────────────────────────────────────── */
-        .divider { border: none; border-top: 1px solid var(--slate-100); margin: 1rem 0; }
+        .divider { border: none; border-top: 1px solid var(--rule-soft); margin: 1rem 0; }
 
         /* ─── FOOTER ───────────────────────────────────────── */
         footer {
             text-align: center;
-            padding: 1.8rem;
-            color: var(--slate-400);
-            font-size: .78rem;
-            border-top: 1px solid var(--slate-100);
+            padding: 2.2rem 1.5rem;
+            color: var(--ink-faint);
+            font-size: .95rem; font-style: italic;
+            border-top: 3px double var(--gold);
+            background: var(--paper-deep);
         }
-        footer a { color: var(--primary); text-decoration: none; }
+        footer .foot-ornament { color: var(--gold); letter-spacing: .5em; display: block; margin-bottom: .6rem; }
+        footer a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--rule); }
+        footer a:hover { color: var(--oxblood); }
 
         /* ─── RESPONSIVE ───────────────────────────────────── */
         @media (max-width: 580px) {
+            body { font-size: 1.02rem; }
             .hero { padding: 3.5rem 1.25rem 2.5rem; }
-            .main { padding: 2rem 1.1rem 3rem; }
+            .hero::after { inset: 9px; }
+            .main { padding: 2.2rem 1.1rem 3rem; }
             .product-inner { flex-direction: column; }
-            .product-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+            .product-icon { width: 46px; height: 46px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -273,9 +388,11 @@
     <div class="hero-content">
         <img src="media/profile.jpg"
              alt="Karthik's profile photo" class="profile-img">
+        <p class="eyebrow">Visual Computing Researcher</p>
         <h1>Karthik Palliyan Manakadavath</h1>
         <p class="subtitle">M.S. Visual Computing · Universität Siegen, Germany</p>
-        <p class="location"><i class="fas fa-map-marker-alt" style="font-size:.75rem;margin-right:.3rem;"></i>Siegen, Germany</p>
+        <p class="location"><i class="fas fa-map-marker-alt" style="font-size:.8rem;margin-right:.35rem;"></i>Siegen, Germany</p>
+        <p class="ornament">❧ · ❧ · ❧</p>
         <div class="hero-social">
             <a href="https://github.com/Karthik-PM" target="_blank"><i class="fab fa-github"></i> GitHub</a>
             <a href="https://www.linkedin.com/in/karthikpm5/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -346,15 +463,15 @@
             Research Publication
         </h2>
         <div class="card">
-            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:.3rem;">Efficient Computing for Immersive VR: Real-Time Panoramic Video Stitching on GPU Platforms</h3>
-            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.75rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:700;color:var(--ink);margin-bottom:.35rem;">Efficient Computing for Immersive VR: Real-Time Panoramic Video Stitching on GPU Platforms</h3>
+            <p style="font-size:.95rem;color:var(--ink-faint);font-style:italic;margin-bottom:.85rem;">
                 IEEE Xplore · 5th International Conference for Emerging Technology, 2024
             </p>
             <ul class="bullet-list">
                 <li>Implemented feature-based video stitching with GPU-accelerated warping using OpenGL and CUDA</li>
                 <li>Developed advanced FPS analysis technique using SMA and WMA</li>
             </ul>
-            <div>
+            <div style="margin-top:.7rem;">
                 <span class="tag">OpenGL</span><span class="tag">CUDA</span>
                 <span class="tag">Computer Vision</span><span class="tag tag-cyan">GPU Computing</span>
             </div>
@@ -370,31 +487,29 @@
             <span class="icon"><i class="fas fa-flask"></i></span>
             Funded Research Projects
         </h2>
-        <p style="font-size:.875rem;color:var(--slate-500);margin-bottom:1rem;">
-            Undergraduate Researcher at <strong style="color:var(--slate-700);">Center for Wireless Networks &amp; Applications (AmritaWNA)</strong> under
-            <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:500;">Dr. Uma Gopalakrishnan</a>
-            and <strong style="color:var(--slate-700);">Prof. Balaji Hariharan</strong>.
+        <p style="font-size:1.05rem;color:var(--ink-faint);margin-bottom:1.2rem;font-style:italic;">
+            Undergraduate Researcher at <strong style="color:var(--ink-soft);font-style:normal;">Center for Wireless Networks &amp; Applications (AmritaWNA)</strong> under
+            <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--green);text-decoration:none;font-style:normal;border-bottom:1px solid var(--rule);">Dr. Uma Gopalakrishnan</a>
+            and <strong style="color:var(--ink-soft);font-style:normal;">Prof. Balaji Hariharan</strong>.
         </p>
 
         <div class="card">
-            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;padding:.55rem .9rem;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:9px;">
-                <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#2563eb,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;flex-shrink:0;">
-                    <i class="fas fa-atom"></i>
-                </div>
+            <div class="fund-box accent" style="margin-bottom:1rem;">
+                <div class="fund-icon"><i class="fas fa-atom"></i></div>
                 <div>
-                    <p style="font-size:.7rem;font-weight:600;color:#1e40af;letter-spacing:.03em;text-transform:uppercase;margin-bottom:.05rem;">Funded By</p>
-                    <p style="font-size:.8rem;font-weight:700;color:#1e3a8a;">Dept. of Science &amp; Technology (DST), Govt. of India</p>
+                    <p class="fund-label">Funded By</p>
+                    <p class="fund-name">Dept. of Science &amp; Technology (DST), Govt. of India</p>
                 </div>
             </div>
-            <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.3rem;color:var(--slate-800);">Augmented Reality Temple Reconstruction</h3>
-            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.65rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:700;margin-bottom:.35rem;color:var(--ink);">Augmented Reality Temple Reconstruction</h3>
+            <p style="font-size:.95rem;color:var(--ink-faint);font-style:italic;margin-bottom:.7rem;">
                 AmritaWNA &nbsp;·&nbsp; Feb 2023 – May 2024
             </p>
             <ul class="bullet-list">
                 <li>Contributed to design and implementation of AR reconstruction pipelines</li>
                 <li>Low-level graphics and image-processing with OpenGL and OpenCV</li>
             </ul>
-            <div style="margin-top:.6rem;">
+            <div style="margin-top:.7rem;">
                 <span class="tag">OpenGL</span><span class="tag">OpenCV</span>
                 <span class="tag tag-cyan">Augmented Reality</span>
             </div>
@@ -405,42 +520,35 @@
 
         <div class="card">
             <!-- Funding timeline -->
-            <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;">
-                <!-- Seed grant -->
-                <div style="display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem;background:#f8fafc;border:1px solid var(--slate-200);border-radius:9px;">
-                    <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#6366f1,#818cf8);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;flex-shrink:0;">
-                        <i class="fas fa-seedling"></i>
-                    </div>
+            <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.1rem;">
+                <div class="fund-box">
+                    <div class="fund-icon"><i class="fas fa-seedling"></i></div>
                     <div>
-                        <p style="font-size:.7rem;font-weight:600;color:var(--slate-500);letter-spacing:.03em;text-transform:uppercase;margin-bottom:.05rem;">Initially Funded By</p>
-                        <p style="font-size:.8rem;font-weight:600;color:var(--slate-700);">Amrita Seed Grant</p>
+                        <p class="fund-label">Initially Funded By</p>
+                        <p class="fund-name">Amrita Seed Grant</p>
                     </div>
                 </div>
-                <!-- Arrow -->
-                <div style="display:flex;align-items:center;gap:.5rem;padding:0 .9rem;">
-                    <div style="width:1px;height:16px;background:var(--slate-300);margin-left:14px;"></div>
-                    <span style="font-size:.7rem;color:var(--slate-400);margin-left:.3rem;">Project subsequently received government funding</span>
+                <div class="fund-connector">
+                    <div class="stem"></div>
+                    <span>Project subsequently received government funding</span>
                 </div>
-                <!-- Government grant -->
-                <div style="display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:9px;">
-                    <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#059669,#10b981);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;flex-shrink:0;">
-                        <i class="fas fa-landmark"></i>
-                    </div>
+                <div class="fund-box accent">
+                    <div class="fund-icon"><i class="fas fa-landmark"></i></div>
                     <div>
-                        <p style="font-size:.7rem;font-weight:600;color:#065f46;letter-spacing:.03em;text-transform:uppercase;margin-bottom:.05rem;">Ministry of Earth Sciences (MoES), Govt. of India</p>
-                        <p style="font-size:.82rem;font-weight:700;color:#064e3b;">Research Grant: ₹43,56,474</p>
+                        <p class="fund-label">Ministry of Earth Sciences (MoES), Govt. of India</p>
+                        <p class="fund-name">Research Grant: ₹43,56,474</p>
                     </div>
                 </div>
             </div>
 
-            <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.3rem;color:var(--slate-800);">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:700;margin-bottom:.35rem;color:var(--ink);">
                 Virtual Reality (VR) Enabled Deep-sea Exploration and Resource Identification
             </h3>
-            <p style="font-size:.78rem;color:var(--slate-500);margin-bottom:.75rem;">
+            <p style="font-size:.95rem;color:var(--ink-faint);font-style:italic;margin-bottom:.85rem;">
                 Bachelor's Thesis &nbsp;·&nbsp; Jan 2024 – May 2024 &nbsp;·&nbsp;
                 AmritaWNA &nbsp;·&nbsp;
                 Guides:
-                <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--primary);text-decoration:none;">Dr. Uma Gopalakrishnan</a>
+                <a href="https://www.amrita.edu/faculty/umag/" target="_blank" style="color:var(--green);text-decoration:none;border-bottom:1px solid var(--rule);">Dr. Uma Gopalakrishnan</a>
                 &amp; Prof. Balaji Hariharan
             </p>
             <ul class="bullet-list">
@@ -448,7 +556,7 @@
                 <li>Cylindrical projection to reduce frame skew; camera calibration for intrinsic estimation</li>
                 <li>CUDA-based acceleration achieving 1.3×–2× speedup</li>
             </ul>
-            <div style="margin-top:.6rem;">
+            <div style="margin-top:.7rem;">
                 <span class="tag">CUDA</span><span class="tag">SIFT</span>
                 <span class="tag tag-cyan">360° VR</span><span class="tag tag-green">Deep-sea Exploration</span>
                 <span class="tag tag-green">Camera Calibration</span>
@@ -499,6 +607,7 @@
 </main>
 
 <footer>
+    <span class="foot-ornament">❦</span>
     <p>Built by <a href="https://github.com/Karthik-PM">Karthik Palliyan Manakadavath</a> · Universität Siegen</p>
 </footer>
 

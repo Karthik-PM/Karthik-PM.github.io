@@ -4,30 +4,83 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Blog — Karthik Palliyan Manakadavath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body{font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;max-width:900px;margin:0 auto;padding:2rem;background:#f8f9fa;color:#212529}
-        .container{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
-        h1{color:#1a73e8;margin-bottom:0.25rem}
-        .meta{color:#666;margin-bottom:1rem}
-        .post-list{margin-top:1rem}
-        .post{padding:1rem;border-radius:8px;border:1px solid #eef3ff;margin-bottom:0.75rem;background:#fcfeff}
-        .post-category {
-            margin-bottom: 2.5rem;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --paper:#f7efd9; --paper-deep:#efe4c6; --card:#fcf7e8;
+            --ink:#2f2418; --ink-soft:#574632; --ink-faint:#8a765a;
+            --gold:#9a7635; --gold-light:#c2a15a; --green:#3f5540; --green-deep:#2c3d2d;
+            --oxblood:#7a3b30; --rule:#cdb888; --rule-soft:#e2d4ad;
         }
+        body {
+            font-family:'EB Garamond', Georgia, serif;
+            max-width:820px; margin:0 auto; padding:2.5rem 1.5rem;
+            background:
+                radial-gradient(ellipse at 20% 0%, #fbf4de 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 100%, #f2e8ca 0%, transparent 55%),
+                var(--paper);
+            color:var(--ink-soft); font-size:1.08rem; line-height:1.72;
+            min-height:100vh;
+        }
+        ::selection { background: rgba(154,118,53,.24); }
+        .container {
+            background:var(--card);
+            padding:2.4rem 2.2rem;
+            border:1px solid var(--rule); border-radius:3px;
+            box-shadow:0 1px 0 #fffdf5 inset, 0 2px 12px rgba(90,70,40,.1);
+            position:relative;
+        }
+        .container::before {
+            content:''; position:absolute; inset:6px;
+            border:1px solid var(--rule-soft); border-radius:2px; pointer-events:none;
+        }
+        .masthead { text-align:center; border-bottom:3px double var(--gold); padding-bottom:1.3rem; margin-bottom:1.8rem; }
+        h1 {
+            font-family:'Playfair Display', serif; font-weight:700;
+            color:var(--ink); font-size:2.6rem; letter-spacing:.01em; margin-bottom:.3rem;
+        }
+        .masthead .meta { color:var(--ink-faint); font-style:italic; margin:0; }
+        .ornament { color:var(--gold); letter-spacing:.5em; margin-top:.7rem; }
+
+        .post-category { margin-bottom:2.6rem; position:relative; }
         .post-category h2 {
-            color: #1a73e8;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-family:'Playfair Display', serif; color:var(--ink);
+            font-size:1.5rem; font-weight:700; margin-bottom:1rem;
+            display:flex; align-items:center; gap:.7rem;
         }
-        .back{display:inline-block;margin-top:1rem;color:#1a73e8;text-decoration:none}
-        .post a{color:#1a73e8;text-decoration:none;font-weight:600}
+        .post-category h2::after {
+            content:''; flex:1; height:0; border-top:1px solid var(--rule);
+            box-shadow:0 3px 0 -2px var(--rule-soft);
+        }
+        .post {
+            padding:1.2rem 1.4rem; border:1px solid var(--rule); border-radius:3px;
+            margin-bottom:.9rem; background:rgba(247,239,217,.55);
+            transition:box-shadow .25s, transform .25s;
+        }
+        .post:hover { box-shadow:0 6px 18px rgba(90,70,40,.14); transform:translateY(-2px); }
+        .post h3 { font-family:'Playfair Display', serif; font-size:1.2rem; font-weight:600; margin-bottom:.3rem; }
+        .post a { color:var(--green); text-decoration:none; border-bottom:1px solid var(--rule); }
+        .post a:hover { color:var(--oxblood); }
+        .post .meta { color:var(--ink-faint); font-style:italic; font-size:1rem; }
+
+        .back {
+            display:inline-block; margin-top:1.4rem; color:var(--green);
+            text-decoration:none; font-style:italic; border-bottom:1px solid var(--rule);
+        }
+        .back:hover { color:var(--oxblood); }
     </style>
 </head>
 <body>
   <div class="container">
-    <h1>Blog</h1>
-    <p class="meta">Thoughts, project notes and short technical write-ups.</p>
+    <div class="masthead">
+      <h1>Blog</h1>
+      <p class="meta">Thoughts, project notes and short technical write-ups.</p>
+      <p class="ornament">❧ · ❧ · ❧</p>
+    </div>
 
     <div class="post-list">
       <section class="post-category">
